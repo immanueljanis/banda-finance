@@ -11,6 +11,9 @@ interface IERC721Receiver {
 
 /// @dev Minimal ERC-721 ownership surface. Mint/burn stay private to lifecycle facets.
 contract BasketNFTFacet {
+    function supportsInterface(bytes4 interfaceId) external pure returns (bool) {
+        return interfaceId == 0x01ffc9a7 || interfaceId == 0x80ac58cd;
+    }
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
