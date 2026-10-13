@@ -1,6 +1,7 @@
+/** Arc has no parent chain: the NAV guard compares quotes against the native block number. */
 export function metadata(header) {
-  if (!header?.l1BlockNumber || !header?.timestamp) throw new Error("Missing parent block metadata");
-  return { block: BigInt(header.l1BlockNumber), time: BigInt(header.timestamp) };
+  if (!header?.number || !header?.timestamp) throw new Error("Missing block metadata");
+  return { block: BigInt(header.number), time: BigInt(header.timestamp) };
 }
 
 export function shouldRefresh(quote, head, maxAge, maxLag) {
