@@ -1,16 +1,14 @@
-﻿# Banda Finance — Arc proof of concept
+﻿# Banda Finance on Arc
 
-One NFT controls a portfolio account. Banda reuses its EIP-2535 Diamond, ERC-721 ownership and ERC-6551 custody architecture on Arc, with explicitly simulated economic assets.
+One NFT controls a portfolio account. Banda reuses its EIP-2535 Diamond, ERC-721 ownership and ERC-6551 custody architecture on Arc, with five onchain Baskets live on Arc Mainnet.
 
-**Arc Mainnet Proof of Concept. All portfolio assets and valuations are simulated and have no real-world backing or monetary value.**
-
-Mainnet deployment is pending authorization and funding. No live Arc contract or transaction links are claimed. The existing website is not yet verified as this Arc build.
+Contracts are deployed and source-verified on Arc Mainnet; see [Arc Mainnet deployment](#arc-mainnet-deployment). Diamond: [`0xeFA0c1B2bc31345d7d795E0786968a607B5C6230`](https://explorer.arc.io/address/0xeFA0c1B2bc31345d7d795E0786968a607B5C6230). A hosted build is not yet published.
 
 ## Implemented scope
 
-NEURAL deposits DemoUSD into an immutable mock router reserve. The router issues six fixed-price demo tokens into the NFT's account. Full redemption burns issued tokens and returns the exact DemoUSD principal. There are no DEX trades, real investments, yield or real-USDC redemptions. The five existing Baskets remain visible; only NEURAL is enabled.
+All five Baskets (NEURAL, RAILS, RESERVE, FRONTIER, FORTRESS) accept deposits of test USDC (tUSDC). Each Basket has its own immutable router that keeps the deposit in reserve and issues fixed-price asset tokens into the NFT's ERC-6551 account. Full redemption burns the issued tokens and returns the exact principal. There are no DEX trades, yield or redemptions into real USDC yet; the asset tokens and tUSDC are test tokens without monetary value.
 
-DemoUSD uses six decimals. Native Arc USDC uses eighteen decimals and pays gas only. The six-decimal real-USDC ERC-20 interface represents the same native balance and is never a separate portfolio asset.
+tUSDC uses six decimals and comes from a limited faucet (1,000 per 24 hours, 5,000 per wallet). Native Arc USDC uses eighteen decimals and pays gas only. The six-decimal real-USDC ERC-20 interface represents the same native balance and is never a separate portfolio asset.
 
 ## Run
 
@@ -22,7 +20,7 @@ Copy-Item .env.example .env.local
 bun dev
 ```
 
-Without deployed addresses, the interface displays a pending deployment state and disables contract actions. Configure the public RPC and three public contract addresses only after confirmed deployment. Public environment values are embedded at build time. Privy is optional; injected MetaMask/Rabby connections work without its application ID.
+The interface reads contract addresses from `deployments/arc-mainnet.json`; `NEXT_PUBLIC_ARC_DIAMOND` and `NEXT_PUBLIC_ARC_DEMO_USD` override them (the local rehearsal uses this). Basket routers are resolved from the Diamond. Public environment values are embedded at build time. Privy is optional; injected MetaMask/Rabby connections work without its application ID.
 
 ```powershell
 bun run test:contracts
