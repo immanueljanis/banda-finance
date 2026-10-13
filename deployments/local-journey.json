@@ -1,0 +1,41 @@
+{
+  "kind": "local-anvil-only-not-mainnet",
+  "checkedAt": "2026-10-13T12:08:00.497Z",
+  "tokenId": "2",
+  "account": "0xB6571e653Ae467D149Fc28Dee4612E13f9981915",
+  "holdingsBeforeRedemption": [
+    {
+      "token": "0xFB7a1A29673F94Db6D4222606324646E6e8A8DEa",
+      "balance": "300000000000000000"
+    },
+    {
+      "token": "0x71D022ef16476cAB42De87570DadC359f9dD2d69",
+      "balance": "100000000000000000"
+    },
+    {
+      "token": "0x3dF59D6246dda0598DCeD3E2c54B51243861215D",
+      "balance": "100000000000000000"
+    },
+    {
+      "token": "0xc6020AFD02090CE0154988beeD6c6098B2217EF8",
+      "balance": "2000000000000000000"
+    },
+    {
+      "token": "0x0E9395f52783E4a46D5418FfA8c965591c1Aa1b4",
+      "balance": "40000000000000000"
+    },
+    {
+      "token": "0xF31056834704330a4C3F7ad47C813a74bcc96222",
+      "balance": "15000001000000000000"
+    }
+  ],
+  "hashes": [
+    "0x70db0b50456840b37314e78a6ab9bf405630549c0cba1b5d1b9c9587deff0707",
+    "0xe6958d4b178172fc36d127dff62f60d4254d6ef80688524a86c0548406f9beee",
+    "0x856a73a4631315eb9baccfa64e57ed05a530079db736298aeb2cb6bcefc00411",
+    "0x6bc5a3da86573f62b9de66e52475247ef1a3e91855f82a5b913125b387728edb"
+  ],
+  "depositBlock": "10",
+  "redemptionBlock": "11",
+  "result": "full-refund-and-zero-issued-holdings"
+}

@@ -1,0 +1,14 @@
+{
+  "chainId": 5042,
+  "status": "not-deployed",
+  "diamond": null,
+  "demoUSD": null,
+  "router": null,
+  "registry": "0x000000006551c19487814612e58FE06813775758",
+  "registryAdapter": null,
+  "accountImplementation": null,
+  "navAdapter": null,
+  "deploymentBlock": null,
+  "transactions": [],
+  "verification": "pending"
+}

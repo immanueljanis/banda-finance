@@ -1,0 +1,175 @@
+{
+  "chainId": 5042,
+  "status": "local-rehearsal",
+  "diamond": "0xbc9f1d60d48258dddb375edd3e25268b43a06b23",
+  "demoUSD": "0x8541754d086fe51b55c06a625da33a05d693957c",
+  "router": "0xefa0c1b2bc31345d7d795e0786968a607b5c6230",
+  "registry": "0x000000006551c19487814612e58FE06813775758",
+  "registryAdapter": "0xd387ad52d5e5ab43d32975853a6a53ee2cd00328",
+  "accountImplementation": "0x287443027c8b97e29408e6395993333bf9b369f5",
+  "navAdapter": "0x0738d88418c625e82364c75a1160f4faa5fdb90e",
+  "deploymentBlock": "1",
+  "transactions": [
+    {
+      "hash": "0x0e8400987fc1ea69fae0965ae1836ea1331a7b567811e8aa9b200125020f1652",
+      "blockNumber": "1",
+      "contract": null,
+      "address": null,
+      "explorer": null
+    },
+    {
+      "hash": "0x7d16e607bf977da9c7c1a772c594611da4b563cd71fee28688e4a3aa6dcf191f",
+      "blockNumber": "2",
+      "contract": "DemoUSD",
+      "address": "0xd387ad52d5e5ab43d32975853a6a53ee2cd00328",
+      "explorer": null
+    },
+    {
+      "hash": "0xc5151ce80e4f905e8854ad2a1b75a4461926e4382533c2db6f9dff6d7e1b3434",
+      "blockNumber": "2",
+      "contract": "RegistryAdapter",
+      "address": "0x8541754d086fe51b55c06a625da33a05d693957c",
+      "explorer": null
+    },
+    {
+      "hash": "0x1c3f9c55a5bb4c5c327e179fdc1a81b031d9d51ba46a1b5789d436f4ac455a5a",
+      "blockNumber": "2",
+      "contract": "ArcBasketAccount",
+      "address": "0x6a06be1e2af61811fc1323f027946a09edf9bed1",
+      "explorer": null
+    },
+    {
+      "hash": "0x4f022d0afc41a05aa7f45f62f8a0ccd16a89225d30f24b65e8336da6473d0731",
+      "blockNumber": "3",
+      "contract": "BandaInit",
+      "address": "0xefa0c1b2bc31345d7d795e0786968a607b5c6230",
+      "explorer": null
+    },
+    {
+      "hash": "0x463e8a7f3db1601dd823cbca60d14a9a1500d5ae648a0dd54d69551db41452e1",
+      "blockNumber": "2",
+      "contract": "DiamondCutFacet",
+      "address": "0x287443027c8b97e29408e6395993333bf9b369f5",
+      "explorer": null
+    },
+    {
+      "hash": "0x754e4ee7205614a791710afad64e5ed5a0efaa6fc0f735ced640862e189b034e",
+      "blockNumber": "2",
+      "contract": "DiamondLoupeFacet",
+      "address": "0x8642f95ed9785afcd0c9f822fc91897e661e4a1f",
+      "explorer": null
+    },
+    {
+      "hash": "0x779a0ae0be3c85603c69cf7645a88e2c3060dbe6855daf65645c82881c063302",
+      "blockNumber": "2",
+      "contract": "OwnershipFacet",
+      "address": "0x34196d3debc549aa6239cbad37039840071aedb3",
+      "explorer": null
+    },
+    {
+      "hash": "0x377fd8418447ea128cbb2a7bfd2dd492bfd96e45194cdb2f79db5df982fd6a15",
+      "blockNumber": "3",
+      "contract": "AdminFacet",
+      "address": "0x0738d88418c625e82364c75a1160f4faa5fdb90e",
+      "explorer": null
+    },
+    {
+      "hash": "0x5fde077ff03f2fc14c1c4655c7762c069459e42c94269c66c671cbf68c7a3bb9",
+      "blockNumber": "3",
+      "contract": "BasketNFTFacet",
+      "address": "0xf9568872c061c9461de6870fc0955230243ba84e",
+      "explorer": null
+    },
+    {
+      "hash": "0xb60a7a0b78a19789b7450a347c2c4694c4e933db84da5911c1f229a5654c130e",
+      "blockNumber": "3",
+      "contract": "DepositFacet",
+      "address": "0xe960fd941c37d36a5c6ee8fe123c928625d1e02c",
+      "explorer": null
+    },
+    {
+      "hash": "0x1b10a5973617ff2cbcd94959922466e98f61359a6c67c0261eb902168985910d",
+      "blockNumber": "3",
+      "contract": "BasketViewFacet",
+      "address": "0xfc2896142e6e0155cb2446d0f78a880d657cc81a",
+      "explorer": null
+    },
+    {
+      "hash": "0xf3f94c66d38d6bc0475bbbec1f493065b3f57a1e15517bf6a8df1caf0dc2783e",
+      "blockNumber": "3",
+      "contract": "RedeemFacet",
+      "address": "0xd5215b5a2d43d29441dc3df84733a91ad6536a3f",
+      "explorer": null
+    },
+    {
+      "hash": "0x0c76dd161b02fe282fb665727e7b141a6546d7e521c3f405d23668ced107a95c",
+      "blockNumber": "3",
+      "contract": "NavGuardFacet",
+      "address": "0xf3a720cd23bba2da8bd9f979daef57df4764ad01",
+      "explorer": null
+    },
+    {
+      "hash": "0xd7d9eee42e7283cc30b33c0f8dd004ae41f1882b4b42b44223c656912f711621",
+      "blockNumber": "3",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": null
+    },
+    {
+      "hash": "0x5b94851b3563da3b35776f7a8c0ff67cf4d7858a12dad31de9b995c857b45a1b",
+      "blockNumber": "3",
+      "contract": "MockPortfolioRouter",
+      "address": "0xdfcaf4666c96b4b887b0fa7b30f05e9e5f1c3af0",
+      "explorer": null
+    },
+    {
+      "hash": "0x436867a4864d2d6f22d0c040056c63ffef42d982a3061a8ad928365c63df6729",
+      "blockNumber": "3",
+      "contract": "DemoNavAdapter",
+      "address": "0x96d8593dbd35b49e78d4729d8fbe082f359c76a1",
+      "explorer": null
+    },
+    {
+      "hash": "0xb3751c8f36290c3c6ef4a108b07f128b192295184fd055b7a2bfe5838c5e9b07",
+      "blockNumber": "3",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": null
+    },
+    {
+      "hash": "0x67a6112bc9b1d1e05bf440e89a2bf6d0bce1dbada0c6a21e2712e59f47764939",
+      "blockNumber": "3",
+      "contract": "Diamond",
+      "address": "0xbc9f1d60d48258dddb375edd3e25268b43a06b23",
+      "explorer": null
+    }
+  ],
+  "verification": "pending",
+  "owner": "0xc924D1236422Ccca9d08e78f059b574f443Ca29d",
+  "assets": [
+    {
+      "address": "0xFB7a1A29673F94Db6D4222606324646E6e8A8DEa",
+      "weightBps": 3000
+    },
+    {
+      "address": "0x71D022ef16476cAB42De87570DadC359f9dD2d69",
+      "weightBps": 2000
+    },
+    {
+      "address": "0x3dF59D6246dda0598DCeD3E2c54B51243861215D",
+      "weightBps": 1500
+    },
+    {
+      "address": "0xc6020AFD02090CE0154988beeD6c6098B2217EF8",
+      "weightBps": 1000
+    },
+    {
+      "address": "0x0E9395f52783E4a46D5418FfA8c965591c1Aa1b4",
+      "weightBps": 1000
+    },
+    {
+      "address": "0xF31056834704330a4C3F7ad47C813a74bcc96222",
+      "weightBps": 1500
+    }
+  ]
+}

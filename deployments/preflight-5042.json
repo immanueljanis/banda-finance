@@ -1,0 +1,22 @@
+{
+  "kind": "read-only-preflight-not-deployment",
+  "checkedAt": "2026-10-13T11:27:34.141Z",
+  "chainId": 5042,
+  "blockNumber": "25744866",
+  "deployer": "0xc924D1236422Ccca9d08e78f059b574f443Ca29d",
+  "intendedDiamondOwner": "0xc924D1236422Ccca9d08e78f059b574f443Ca29d",
+  "nonce": 0,
+  "nativeBalanceUSDC": "0",
+  "gasPriceNativeUnits": "20000001041",
+  "registry": "0x000000006551c19487814612e58FE06813775758",
+  "registryStatus": "absent-deploy-published-singleton",
+  "expectedRegistryCodeHash": "0xda1d5b06e579f9e42e59b00fbc22939896ecb38dc8830d40de0a2508fecd6735",
+  "factory": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+  "factoryBytecodeVerified": true,
+  "simulationPath": "contracts/broadcast/DeployArc.s.sol/5042/dry-run/run-latest.json",
+  "simulationTransactions": 19,
+  "simulatedGasLimitTotal": "20936840",
+  "budgetAtTwiceCurrentGasPriceUSDC": "0.83747364359050088",
+  "fundedForBudget": false,
+  "authorization": "NOT AUTHORIZED TO BROADCAST"
+}
