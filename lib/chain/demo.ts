@@ -1,5 +1,6 @@
 import { createPublicClient, http, parseAbi, keccak256, toBytes, numberToHex, encodeAbiParameters, formatUnits, type Address } from "viem";
 import { ARC, CONTRACTS, DEPLOYED, REAL_USDC } from "./arc";
+import { BASKETS } from "@/constants/baskets";
 
 export const demoAbi = parseAbi([
   "function claim()", "function nextClaimAt(address) view returns (uint256)", "function claimed(address) view returns (uint256)",
@@ -25,9 +26,14 @@ export async function assertDemoDeployment() {
     demoClient.readContract({ address: CONTRACTS.diamond, abi: demoAbi, functionName: "strategy", args: [1] }),
     demoClient.readContract({ address: CONTRACTS.demoUSD, abi: demoAbi, functionName: "decimals" }),
   ]);
-  if (settlement.toLowerCase() !== CONTRACTS.demoUSD.toLowerCase() || settlement.toLowerCase() === REAL_USDC.toLowerCase() || strategy[0].toLowerCase() !== CONTRACTS.router.toLowerCase() || decimals !== 6 || strategy[2] !== 0) {
-    throw new Error("Deployment does not match the DemoUSD configuration. Actions blocked.");
+  if (settlement.toLowerCase() !== CONTRACTS.demoUSD.toLowerCase() || settlement.toLowerCase() === REAL_USDC.toLowerCase() || decimals !== 6 || strategy[2] !== 0) {
+    throw new Error("Deployment does not match the test USDC configuration. Actions blocked.");
   }
+}
+/** The basket router registered in the Diamond for a catalogue strategy. */
+export async function routerFor(strategyId: number, blockNumber?: bigint) {
+  const [router] = await demoClient.readContract({ address: CONTRACTS.diamond, abi: demoAbi, functionName: "strategy", args: [strategyId], blockNumber });
+  return router;
 }
 export type DemoHolding = { token: Address; symbol: string; balance: string; weight: number; price: string };
 export type DemoPosition = { tokenId: string; strategyId: number; slug: string; name: string; account: Address; shares: string; displayShares: string; owner: Address; holdings: DemoHolding[] };
@@ -42,10 +48,14 @@ export async function readDemoPortfolio(owner: Address) {
   ]);
   const count = Number(BigInt(raw || "0x0"));
   if (count > 5000) throw new Error("Demo indexer capacity exceeded; event indexing is required.");
-  const [legs, prices] = await Promise.all([
-    demoClient.readContract({ address: CONTRACTS.router, abi: demoAbi, functionName: "legs", blockNumber }),
-    demoClient.readContract({ address: CONTRACTS.router, abi: demoAbi, functionName: "simulatedPrices", blockNumber }),
-  ]);
+  const routers = new Map<number, Promise<readonly [readonly [readonly Address[], readonly number[]], readonly bigint[]]>>();
+  const routerLegs = (strategyId: number) => {
+    if (!routers.has(strategyId)) routers.set(strategyId, routerFor(strategyId, blockNumber).then(router => Promise.all([
+      demoClient.readContract({ address: router, abi: demoAbi, functionName: "legs", blockNumber }),
+      demoClient.readContract({ address: router, abi: demoAbi, functionName: "simulatedPrices", blockNumber }),
+    ])));
+    return routers.get(strategyId)!;
+  };
   const positions: DemoPosition[] = [];
   for (let start = 1; start <= count; start += 20) {
     const ids = Array.from({ length: Math.min(20, count - start + 1) }, (_, i) => BigInt(start + i));
@@ -57,6 +67,7 @@ export async function readDemoPortfolio(owner: Address) {
       const holder = await demoClient.readContract({ address: CONTRACTS.diamond, abi: demoAbi, functionName: "ownerOf", args: [id], blockNumber });
       if (holder.toLowerCase() !== owner.toLowerCase()) return null;
       const [strategyId, account, shares] = await demoClient.readContract({ address: CONTRACTS.diamond, abi: demoAbi, functionName: "basket", args: [id], blockNumber });
+      const [legs, prices] = await routerLegs(strategyId);
       const holdings = await Promise.all(legs[0].map(async (token, i) => {
         const [balance, symbol] = await Promise.all([
           demoClient.readContract({ address: token, abi: demoAbi, functionName: "balanceOf", args: [account], blockNumber }),
@@ -64,7 +75,7 @@ export async function readDemoPortfolio(owner: Address) {
         ]);
         return { token, symbol, balance: balance.toString(), weight: legs[1][i] / 100, price: prices[i].toString() };
       }));
-      return { tokenId: id.toString(), strategyId, account, shares: shares.toString(), displayShares: formatUnits(shares,6), owner: holder, slug: "neural", name: "NEURAL", holdings };
+      return { tokenId: id.toString(), strategyId, account, shares: shares.toString(), displayShares: formatUnits(shares,6), owner: holder, slug: BASKETS[strategyId - 1]?.slug ?? "neural", name: BASKETS[strategyId - 1]?.name ?? `Strategy ${strategyId}`, holdings };
     }));
     positions.push(...results.filter((v): v is DemoPosition => v !== null));
   }
