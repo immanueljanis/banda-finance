@@ -15,7 +15,7 @@ function fixture(fresh = false) {
   const snapshot = {
     adapter: ADAPTER, age: 900, lag: 20, operator: "0xoperator", owner: "0xadmin",
     strategy: "0xstrategy", enabled: true,
-    header: { number: "0x7782c46", l1BlockNumber: "0xb3fb5a", timestamp: "0x6ab96804" },
+    header: { number: "0xb3fb5a", timestamp: "0x6ab96804" },
     quote: [10n ** 18n, 1790535684n - (fresh ? 0n : 901n), 11795290n, true],
   };
   const journal = {
@@ -24,7 +24,7 @@ function fixture(fresh = false) {
     settled: async () => events.push(["settled"]),
   };
   const chain = {
-    signer: "0xoperator", chainId: async () => 46630,
+    signer: "0xoperator", chainId: async () => 5042,
     snapshot: async () => snapshot,
     simulate: async args => events.push(["simulate", args]),
     fees: async () => ({ gas: 60_000n, gasPrice: 10_000_000n, balance: 10n ** 18n, pending: 7, mined: 7 }),
@@ -68,7 +68,7 @@ for (const scenario of ["wrong chain", "admin key", "wrong operator", "adapter c
     if (scenario === "adapter changed") f.snapshot.adapter = "0xother";
     if (scenario === "invalid quote") f.snapshot.quote[3] = false;
     if (scenario === "future quote") f.snapshot.quote[2] = 125316166n;
-    if (scenario === "missing parent") delete f.snapshot.header.l1BlockNumber;
+    if (scenario === "missing parent") delete f.snapshot.header.number;
     const fees = await f.chain.fees();
     if (scenario === "low balance") f.chain.fees = async () => ({ ...fees, balance: 0n });
     if (scenario === "high fee") f.chain.fees = async () => ({ ...fees, gasPrice: 10n ** 18n });

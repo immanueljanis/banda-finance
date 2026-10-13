@@ -2,8 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { metadata, shouldRefresh } from "../nav-policy.mjs";
 test("parent block is used instead of RPC L2 number", () => {
-  assert.deepEqual(metadata({number:"0x7782c46",l1BlockNumber:"0xb3fb5a",timestamp:"0x6ab96804"}), {block:11795290n,time:1790535684n});
-  assert.throws(() => metadata({number:"0x7782c46",timestamp:"0x1"}));
+  assert.deepEqual(metadata({number:"0xb3fb5a",timestamp:"0x6ab96804"}), {block:11795290n,time:1790535684n});
+  assert.throws(() => metadata({timestamp:"0x1"}));
 });
 test("either freshness threshold renews; healthy quotes skip", () => {
   const q = [10n,1000n,100n,true];
