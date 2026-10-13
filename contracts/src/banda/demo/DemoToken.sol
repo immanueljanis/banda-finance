@@ -60,7 +60,7 @@ contract DemoUSD is DemoToken {
     mapping(address => uint256) public nextClaimAt;
     event DemoCreditsClaimed(address indexed wallet, uint256 amount, uint256 nextClaimAt);
     // Self-issued: the inherited external mint cannot be called by any wallet.
-    constructor() DemoToken("DemoUSD - No Monetary Value", "DemoUSD", 6, address(this)) {}
+    constructor() DemoToken("Banda Test USDC - No Monetary Value", "tUSDC", 6, address(this)) {}
     function claim() external {
         require(block.timestamp >= nextClaimAt[msg.sender], "Demo: daily limit");
         require(claimed[msg.sender] + GRANT <= LIFETIME_LIMIT, "Demo: lifetime limit");
