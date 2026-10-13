@@ -1,21 +1,20 @@
 # Judge walkthrough
 
-Status: mainnet deployment and a hosted Arc demo are pending. Do not treat the existing public Banda website or local rehearsal as a verified Arc deployment. Use this walkthrough only after `deployments/arc-mainnet.json` contains confirmed addresses and source-verification results.
+Contracts are live and source-verified on Arc Mainnet (Diamond [`0xeFA0c1B2bc31345d7d795E0786968a607B5C6230`](https://explorer.arc.io/address/0xeFA0c1B2bc31345d7d795E0786968a607B5C6230)). The hosted frontend is pending; until then run it locally with `bun dev`, which reads the mainnet manifest.
 
-1. Open the deployed frontend and read the persistent simulation disclosure.
-2. Connect MetaMask, Rabby or a supported wallet. Approve switching to Arc Mainnet (5042). Native USDC is required only for gas.
-3. Open Demo faucet. Claim 1,000 DemoUSD. Confirm the receipt and inspect its explorer link. Credits have no monetary value; limits are 24 hours between claims and 5,000 per wallet lifetime.
-4. Select NEURAL. The other four catalogue entries are visible but unsupported. Enter at least 10 DemoUSD with at most six decimal places; 100 is a convenient example.
-5. Review the fixed allocation. Approve the exact DemoUSD amount and confirm deposit. These are separate transactions when allowance is insufficient.
-6. Open Portfolio. Inspect the NFT ID, owner, ERC-6551 account, fixed principal NAV, underlying quantities and contract links. Independently query the underlying ERC-20 `balanceOf(account)` values.
-7. Redeem all. Confirm the receipt. The original principal returns as DemoUSD; issued underlying balances are burned and the NFT closes. No real USDC is paid out.
-8. Record actual claim, approval, deposit and redemption hashes, block numbers and explorer links. Confirm successful receipts before describing the demonstration as complete.
+1. Open the frontend. Connect MetaMask, Rabby or a supported wallet and approve switching to Arc Mainnet (5042). Native USDC is needed only for gas.
+2. Open Portfolio and scroll to Faucet. Claim 1,000 test USDC (limits: one claim per 24 hours, 5,000 per wallet). Confirm the receipt via its explorer link.
+3. Pick any of the five Baskets. Enter at least 10 USDC with at most six decimal places; 100 is a convenient example. Review the allocation preview.
+4. Approve the exact amount and confirm the deposit. These are separate transactions when allowance is insufficient.
+5. Open Portfolio. Inspect the NFT ID, owner, ERC-6551 account, value, token balances and contract links. Independently query each asset token's `balanceOf(account)`.
+6. Redeem all. Confirm the receipt. The deposit returns as test USDC, the issued asset tokens are burned and the NFT closes.
+7. Record the claim, approval, deposit and redemption hashes, block numbers and explorer links.
 
 ## Local validation
 
 Run the contract tests and production build described in the README. `tests/arc.spec.ts` exercises an injected wallet against a local Anvil deployment and checks actual receipts, token balances and the full refund. Its generated `deployments/local-journey.json` is explicitly local-only; the test restores an Anvil snapshot afterward. `playwright.arc.config.ts` also retains the certificate animation check.
 
-The browser suite expects a local node at port 8545 with chain ID 5042, a confirmed `deployments/local-arc.json`, and the frontend at port 3120 built with that local RPC and manifest's three public addresses. Never use a funded mainnet wallet/provider for the local test fixture.
+The browser suite expects a local node at port 8545 with chain ID 5042, a confirmed `deployments/local-arc.json`, and the frontend at port 3120 built with that local RPC and the local manifest's Diamond and tUSDC addresses. Never use a funded mainnet wallet/provider for the local test fixture.
 
 In separate terminals, from the repository root:
 
