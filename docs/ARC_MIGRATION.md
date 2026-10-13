@@ -9,12 +9,12 @@ Existing Diamond storage, upgrade ownership, ERC-721 transfers/approvals, deposi
 ## Changed
 
 - `lib/chain/arc.ts`: Arc Mainnet 5042, native USDC with 18 decimals, explicit conversion helpers and deployment manifest. No assumed multicall deployment.
-- `contracts/src/banda/demo/`: isolated six-decimal DemoUSD faucet, restricted mock tokens, fixed allocation router and fixed principal NAV adapter.
+- `contracts/src/banda/demo/`: isolated six-decimal tUSDC faucet, restricted test asset tokens, a fixed-allocation router per Basket and a fixed principal NAV adapter.
 - `contracts/src/banda/accounts/`: standard registry compatibility and NFT-controlled account; the old mock registry is not used on mainnet.
-- `contracts/script/DeployArc.s.sol`: explicit chain checks, canonical registry bytecode validation, nine-facet deployment and zero-fee NEURAL configuration. Storage layout is unchanged. Rebalance selectors are excluded.
+- `contracts/script/DeployArc.s.sol`: explicit chain checks, canonical registry bytecode validation, nine-facet deployment and five zero-fee strategies (one router per Basket). Storage layout is unchanged. Rebalance selectors are excluded.
 - `components/wallet.tsx`, `lib/chain/demo.ts`: wallet simulation, exact approval, receipt confirmation, real account balances and full redemption.
-- Relevant pages disclose simulated assets. Four unsupported Baskets remain visible with disabled deposit actions. Legacy market, yield and NAV preparation APIs return HTTP 410.
-- `deployments/` separates pending mainnet/testnet manifests from local-only rehearsal evidence. Dry-run addresses are not live contract addresses.
+- All five Baskets accept deposits. Settlement is labelled USDC with a "test" badge. Legacy market, yield and NAV preparation APIs return HTTP 410.
+- `deployments/` separates the mainnet manifest (from confirmed receipts) from local-only rehearsal evidence. Dry-run addresses are not live contract addresses.
 
 ## Official references
 
@@ -24,8 +24,8 @@ The canonical ERC-6551 registry was absent at the recorded preflight block. The 
 
 ## Deployment status
 
-Mainnet deployment is pending explicit authorization and funding. A read-only simulation completed with 19 transactions and 20,936,840 estimated gas. The recorded two-times-gas-price budget was approximately 0.84 native USDC; this is an estimate, not a fixed fee. The proposed deployer/owner is `0xc924D1236422Ccca9d08e78f059b574f443Ca29d`; its balance was zero at preflight. Repeat preflight before broadcasting.
+Deployed to Arc Mainnet on 2026-10-13 from block 25785669: 27 confirmed transactions, 35,850,597 gas, 0.717 native USDC. Owner: `0xc924D1236422Ccca9d08e78f059b574f443Ca29d`. The deployment installed the canonical ERC-6551 registry singleton, whose runtime hash was checked.
 
-The Arc explorer identifies itself as Blockscout. When broadcast is authorized, Foundry should use `--verify --verifier blockscout --verifier-url https://explorer.arc.io/api/`. Verification state must be checked on each resulting address and recorded after confirmation; it cannot be inferred from the broadcast exit code.
+All 52 contracts (deployment contracts, router-issued asset tokens and the registry) are verified on Sourcify with exact creation and runtime matches, and the Arc explorer shows them as verified. The explorer API sits behind a Cloudflare challenge, so verify through `--verifier sourcify`. Addresses are in the README and `deployments/arc-mainnet.json`.
 
-Local Anvil transactions are genuine local execution, but are not Arc Mainnet evidence. Explorer source verification, public application deployment and a mainnet user journey remain pending.
+Local Anvil transactions are genuine local execution, but are not Arc Mainnet evidence. Public application hosting and a recorded mainnet user journey remain pending.
