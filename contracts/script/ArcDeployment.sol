@@ -23,9 +23,15 @@ abstract contract ArcDeployment {
     Diamond public deployedDiamond;
     DemoUSD public deployedSettlement;
     MockPortfolioRouter public deployedRouter;
+    MockPortfolioRouter[] public deployedRouters;
     DemoNavAdapter public deployedNav;
     RegistryAdapter public deployedAdapter;
     ArcBasketAccount public deployedAccount;
+    string[] private legSymbols;
+    uint16[] private legWeights;
+    uint256[] private legPrices;
+
+    /// @notice Strategy IDs 1-5 follow the frontend catalogue order: NEURAL, RAILS, RESERVE, FRONTIER, FORTRESS.
     function _deployArc(address admin, address registry) internal {
         deployedSettlement = new DemoUSD();
         deployedAdapter = new RegistryAdapter(registry);
@@ -33,14 +39,38 @@ abstract contract ArcDeployment {
         BandaInit init = new BandaInit();
         deployedDiamond = new Diamond(admin, _deployCuts(), address(init), abi.encodeCall(BandaInit.init,
             (address(deployedSettlement), address(deployedAdapter), address(deployedAccount))));
-        uint16[] memory weights = new uint16[](6);
-        weights[0]=3000; weights[1]=2000; weights[2]=1500; weights[3]=1000; weights[4]=1000; weights[5]=1500;
-        uint256[] memory prices = new uint256[](6);
-        prices[0]=100e6; prices[1]=200e6; prices[2]=150e6; prices[3]=5e6; prices[4]=250e6; prices[5]=1e6;
-        deployedRouter = new MockPortfolioRouter(deployedSettlement, address(deployedDiamond), weights, prices);
-        deployedNav = new DemoNavAdapter(address(deployedRouter));
+        _leg("mNVDA", 3000, 100e6); _leg("mTAO", 2000, 200e6); _leg("mGOOGL", 1500, 150e6);
+        _leg("mNEAR", 1000, 5e6); _leg("mGLD", 1000, 250e6); _leg("mCASH", 1500, 1e6);
+        _router();
+        _leg("mCOIN", 2000, 250e6); _leg("mCRCL", 1500, 100e6); _leg("mETH", 2000, 2500e6); _leg("mSOL", 1500, 150e6);
+        _leg("mLINK", 1000, 15e6); _leg("mGLD", 500, 250e6); _leg("mCASH", 1500, 1e6);
+        _router();
+        _leg("mBTC", 3000, 60_000e6); _leg("mSPY", 2500, 500e6); _leg("mGLD", 2000, 250e6);
+        _leg("mETH", 1000, 2500e6); _leg("mCASH", 1500, 1e6);
+        _router();
+        _leg("mQQQ", 2500, 450e6); _leg("mAMD", 1500, 150e6); _leg("mTSLA", 1500, 250e6); _leg("mRENDER", 1500, 5e6);
+        _leg("mSOL", 1000, 150e6); _leg("mGLD", 500, 250e6); _leg("mUSO", 500, 75e6); _leg("mCASH", 1000, 1e6);
+        _router();
+        _leg("mGLD", 3000, 250e6); _leg("mSPY", 2000, 500e6); _leg("mBTC", 1500, 60_000e6);
+        _leg("mETH", 1000, 2500e6); _leg("mCASH", 2500, 1e6);
+        _router();
+        deployedRouter = deployedRouters[0];
+        address[] memory routers = new address[](deployedRouters.length);
+        for (uint256 i; i < routers.length; ++i) routers[i] = address(deployedRouters[i]);
+        deployedNav = new DemoNavAdapter(routers);
         AdminFacet(address(deployedDiamond)).configureNavGuardPolicy(address(deployedNav), 1 days, 100);
-        AdminFacet(address(deployedDiamond)).configureStrategy(0, address(deployedRouter), 10e6, 0, admin, true);
+        for (uint256 i; i < routers.length; ++i) {
+            AdminFacet(address(deployedDiamond)).configureStrategy(0, routers[i], 10e6, 0, admin, true);
+        }
+    }
+
+    function _leg(string memory symbol, uint16 weight, uint256 price) private {
+        legSymbols.push(symbol); legWeights.push(weight); legPrices.push(price);
+    }
+
+    function _router() private {
+        deployedRouters.push(new MockPortfolioRouter(deployedSettlement, address(deployedDiamond), legSymbols, legWeights, legPrices));
+        delete legSymbols; delete legWeights; delete legPrices;
     }
     function _deployCuts() internal returns (IDiamondCut.FacetCut[] memory cuts) {
         cuts = new IDiamondCut.FacetCut[](9);
