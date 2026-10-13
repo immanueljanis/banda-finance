@@ -1,108 +1,64 @@
-# Banda
+﻿# Banda Finance — Arc proof of concept
 
-> **Composable ETFs onchain. One token, every asset inside.**
+One NFT controls a portfolio account. Banda reuses its EIP-2535 Diamond, ERC-721 ownership and ERC-6551 custody architecture on Arc, with explicitly simulated economic assets.
 
-Banda is a composable ETF platform on Robinhood Chain. Deposit USDG and you receive a Basket: one ERC-721 token with its own ERC-6551 vault that holds every stock, crypto and gold position inside. Send the token and the whole portfolio moves with it. Each holding can be checked onchain, in the Basket's own vault.
+**Arc Mainnet Proof of Concept. All portfolio assets and valuations are simulated and have no real-world backing or monetary value.**
 
-**[Try it on testnet](https://www.bandafinance.xyz)** · [Diamond on the explorer](https://explorer.testnet.chain.robinhood.com/address/0xB1dD20D06fc0741237c812Ca904bD8dc3f7DE4e7) · [How it works](https://www.bandafinance.xyz/docs)
+Mainnet deployment is pending authorization and funding. No live Arc contract or transaction links are claimed. The existing website is not yet verified as this Arc build.
 
-![Banda landing page](docs/hero.png)
+## Implemented scope
 
-## Key features
+NEURAL deposits DemoUSD into an immutable mock router reserve. The router issues six fixed-price demo tokens into the NFT's account. Full redemption burns issued tokens and returns the exact DemoUSD principal. There are no DEX trades, real investments, yield or real-USDC redemptions. The five existing Baskets remain visible; only NEURAL is enabled.
 
-- **One token, a whole portfolio:** a Basket is an ERC-721 token. Its ERC-6551 vault holds the assets, and only the Diamond can operate that vault, through a short allow-list of actions.
-- **0% in, 0% out, 0.25% a year:** no fee to buy or withdraw. The yearly fee is charged only on withdrawal.
-- **Live market prices:** Chainlink feeds on Robinhood Chain mainnet, converted through USDG/USD with a 0.99–1.01 peg band, plus CoinGecko for SOL, TAO, NEAR and RENDER. The pool rejects prices older than 15 minutes and moves of more than 20% in one update.
-- **Settled in Paxos USDG:** deposits and withdrawals use Paxos' official testnet USDG.
-- **Built to compose:** Baskets are standard tokens, so other protocols can hold, lend or trade them. Banda curates the five demo Baskets today; open creation is on the roadmap.
+DemoUSD uses six decimals. Native Arc USDC uses eighteen decimals and pays gas only. The six-decimal real-USDC ERC-20 interface represents the same native balance and is never a separate portfolio asset.
 
-## Built during Open House
+## Run
 
-- **Diamond core (EIP-2535):** facets for deposit, holdings-aware redeem, Basket NFT, views, admin, NAV guard and rebalance, all on one namespaced storage layout.
-- **Vault-held assets:** every leg is bought straight into the Basket's vault, and a withdrawal sells exactly the vault's share.
-- **Market-priced pool:** `PricedAssetPool` with an updater, a freshness check, a per-update bound and owner override, fed by Chainlink on Robinhood Chain mainnet.
-- **On-demand NAV backend:** a Bun service on Railway. When a signed-in user starts a buy or withdrawal, it publishes fresh prices and a quote. It verifies Privy JWTs, accepts only the app's exact origin, writes to a persistent journal and is capped at 120 updates a day.
-- **Settlement migrations:** `SettlementMigrationInit` switches the settlement asset and refuses to run while any Basket is open. Every live migration was rehearsed on a fork of live state first.
-- **App:** Privy sign-in by email, Google or wallet; buy, partial and full withdrawal; P&L per Basket; backtests on real closing prices; a storage-based indexer that needs no database.
-- **Robinhood Chain integration:** all contracts are deployed on Robinhood Chain testnet (chain 46630), and prices are read from Chainlink on Robinhood Chain mainnet (chain 4663).
-- **Tests:** 192 automated tests (115 Foundry + 77 Node), plus type checking and a production build, in one `bun run check`.
+Prerequisites: Node.js, Bun 1.3.3 and Foundry with Solidity 0.8.30 support.
 
-## Architecture
-
-```mermaid
-flowchart LR
-  U[User wallet] -- USDG --> D[Banda Diamond<br/>EIP-2535]
-  D -- mints --> N[Basket NFT<br/>ERC-721]
-  N -. owns .-> V[Basket vault<br/>ERC-6551]
-  D -- buys legs via --> S[BasketStrategy]
-  S --> P[PricedAssetPool]
-  P -- assets --> V
-  B[NAV backend<br/>Railway] -- prices + quote --> P
-  C[Chainlink on Robinhood mainnet<br/>+ CoinGecko] --> B
+```powershell
+bun install --frozen-lockfile
+Copy-Item .env.example .env.local
+bun dev
 ```
 
-Withdrawal runs the same path in reverse: the vault's share of each leg is sold back to USDG and paid to the NFT owner, after a fresh quote (at most 900 seconds and 20 parent blocks old).
+Without deployed addresses, the interface displays a pending deployment state and disables contract actions. Configure the public RPC and three public contract addresses only after confirmed deployment. Public environment values are embedded at build time. Privy is optional; injected MetaMask/Rabby connections work without its application ID.
 
-## Contract addresses
-
-Robinhood Chain testnet, chain ID 46630.
-
-| Contract | Address |
-| --- | --- |
-| Banda Diamond | [`0xB1dD20D06fc0741237c812Ca904bD8dc3f7DE4e7`](https://explorer.testnet.chain.robinhood.com/address/0xB1dD20D06fc0741237c812Ca904bD8dc3f7DE4e7) |
-| Paxos USDG (settlement) | [`0x7E955252E15c84f5768B83c41a71F9eba181802F`](https://explorer.testnet.chain.robinhood.com/address/0x7E955252E15c84f5768B83c41a71F9eba181802F) |
-| PricedAssetPool | [`0x938dc51789b1023f7ab7a63d420aa10351af2681`](https://explorer.testnet.chain.robinhood.com/address/0x938dc51789b1023f7ab7a63d420aa10351af2681) |
-| NEURAL strategy (21) | [`0x164bdec855268f04a978b1dfefae35f13f155a41`](https://explorer.testnet.chain.robinhood.com/address/0x164bdec855268f04a978b1dfefae35f13f155a41) |
-| RAILS strategy (22) | [`0xcb2f3f3d2c48830a41b576f24d03dc50644cbabc`](https://explorer.testnet.chain.robinhood.com/address/0xcb2f3f3d2c48830a41b576f24d03dc50644cbabc) |
-| RESERVE strategy (23) | [`0x1aa8339caa51c0391aa7a4cd5f09c77c8a0ba1d4`](https://explorer.testnet.chain.robinhood.com/address/0x1aa8339caa51c0391aa7a4cd5f09c77c8a0ba1d4) |
-| FRONTIER strategy (24) | [`0xb6ff097c240271401866b34543e077c02c390948`](https://explorer.testnet.chain.robinhood.com/address/0xb6ff097c240271401866b34543e077c02c390948) |
-| FORTRESS strategy (25) | [`0xad019bdf40b46a130ffc8f93ade62329aa7040e7`](https://explorer.testnet.chain.robinhood.com/address/0xad019bdf40b46a130ffc8f93ade62329aa7040e7) |
-
-## Testnet honesty
-
-- Vault holdings are clearly labelled practice tokens, minted and burned by the pool and bought and sold at live market prices. They are not the real assets.
-- The income portion (10–25% of each Basket) holds USDG. Its income is simulated in the app at the live rate of the Steakhouse USDG vault on Morpho (Robinhood Chain mainnet); on mainnet the portion is designed to sit in that vault. See [YIELD_ADMISSION.md](contracts/YIELD_ADMISSION.md).
-- History charts are hypothetical backtests on real closing prices, not a record of trades.
-- Admin is a single key on testnet. A multisig and timelock come before mainnet.
-
-## Quick start
-
-Prerequisites: [Bun](https://bun.sh), Node.js 22+ and [Foundry](https://getfoundry.sh).
-
-```sh
-git clone https://github.com/immanueljanis/banda.git
-cd banda
-bun install
-cp .env.example .env.local   # Privy app id and RPC URLs
-bun run dev
-```
-
-To try a deposit, get testnet USDG from the [Paxos faucet](https://faucet.paxos.com/?network=robinhood) and testnet ETH for gas from the Robinhood Chain faucet.
-
-Run every check (Node tests, Foundry tests, `tsc`, `next build`):
-
-```sh
+```powershell
+bun run test:contracts
 bun run check
 ```
 
-Contracts only:
+`check` executes the retained Node unit tests, non-Robinhood-fork Solidity tests, TypeScript and production build. Legacy fork tests require their original network environment. The dedicated Arc browser suite is `bun run test:e2e:arc`; see the local setup requirements in the demo guide. Existing legacy browser tests are retained but target the previous product.
 
-```sh
-forge test --root contracts --match-contract Banda
+## Mainnet preparation — no broadcast
+
+From `contracts/`:
+
+```powershell
+$env:BANDA_CHAIN_ID="5042"
+$env:BANDA_DEPLOYER="0xc924D1236422Ccca9d08e78f059b574f443Ca29d"
+forge script script/DeployArc.s.sol:DeployArc --rpc-url https://rpc.mainnet.arc.io --sender $env:BANDA_DEPLOYER --non-interactive
 ```
 
-## Repository layout
+From the repository root:
 
-- `contracts/src/diamond/`: EIP-2535 proxy, cut, loupe and ownership
-- `contracts/src/banda/`: facets, the Basket vault, strategy, pools and the settlement initializer
-- `contracts/script/`: deployment and migration scripts for Robinhood Chain testnet
-- `app/`, `components/`: the Next.js app
-- `lib/chain/`: chain config, valuation, P&L and the indexer
-- `lib/nav/`, `scripts/nav-server.mjs`: the NAV backend and its price sources
-- `scripts/validation/`: Node test suites
+```powershell
+node scripts/arc-preflight.mjs contracts/broadcast/DeployArc.s.sol/5042/dry-run/run-latest.json
+```
 
-## Roadmap
+Review chain ID, sender, nonce, native balance, canonical registry/factory bytecode and estimated USDC budget before requesting explicit broadcast authorization. Use a local encrypted keystore or hardware signer; never paste or commit private keys. Only after authorization may the deployment command include `--broadcast` with an appropriate signer. After successful receipts, `scripts/arc-evidence.mjs` records addresses and blocks from confirmed Foundry output. Source verification remains a separate required step. Never promote dry-run or local addresses into the mainnet manifest.
 
-1. **Mainnet assets:** issuer-bridged real assets and the USDG yield portion on Robinhood Chain mainnet. The admission criteria are in [ASSET_ADMISSION.md](contracts/ASSET_ADMISSION.md).
-2. **Security:** an audit, a multisig admin and a timelock.
-3. **Open platform:** anyone can create a Basket, and Baskets become building blocks in other protocols.
+The Arc explorer is Blockscout. The authorized broadcast should include `--verify --verifier blockscout --verifier-url https://explorer.arc.io/api/`. Verification is only successful after every deployed contract reports verified source on the explorer; a submitted request is not enough. The evidence manifest stays `verification: "pending"` until that check is complete.
+
+## Documentation
+
+- [Implementation audit and plan](docs/ARC_IMPLEMENTATION_PLAN.md)
+- [Arc migration](docs/ARC_MIGRATION.md)
+- [Architecture and accounting](docs/ARCHITECTURE.md)
+- [Judge walkthrough](docs/DEMO_GUIDE.md)
+- [Security and limitations](docs/SECURITY_AND_LIMITATIONS.md)
+- [Submission draft](docs/ARC_MICROGRANTS_SUBMISSION.md)
+- [Historical Robinhood documentation](docs/ROBINHOOD_LEGACY_README.md)
+
+This project is unaudited. Diamond upgrades and configuration remain owner-controlled. Local rehearsal evidence is explicitly not mainnet evidence.
