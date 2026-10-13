@@ -46,8 +46,8 @@ let cached: { expiresAt: number; value: LiveChainSnapshot } | undefined;
 let inFlight: Promise<LiveChainSnapshot> | undefined;
 
 export function getPublicClient(): PublicClient {
-  const rpcUrl = process.env.ROBINHOOD_TESTNET_RPC_URL;
-  if (!rpcUrl) throw new Error("ROBINHOOD_TESTNET_RPC_URL is not configured");
+  const rpcUrl = process.env.ARC_MAINNET_RPC_URL;
+  if (!rpcUrl) throw new Error("ARC_MAINNET_RPC_URL is not configured");
   return createPublicClient({
     chain: ROBINHOOD_TESTNET,
     transport: http(rpcUrl, { timeout: 8_000, retryCount: 1, retryDelay: 250 }),
