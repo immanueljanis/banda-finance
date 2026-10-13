@@ -14,7 +14,7 @@ if (await client.getTransactionCount({ address: deployer }) !== 0) throw new Err
 await client.request({ method: 'anvil_setCode', params: [factory, factoryCode] });
 await client.request({ method: 'anvil_setBalance', params: [deployer, '0x56bc75e2d63100000'] });
 const env = { ...process.env, BANDA_CHAIN_ID: '5042', BANDA_DEPLOYER: deployer, ARC_MAINNET_RPC_URL: rpc };
-const deployment = spawnSync('forge', ['script', 'script/DeployArc.s.sol:DeployArc', '--rpc-url', rpc, '--sender', deployer, '--unlocked', '--broadcast', '--non-interactive'], {
+const deployment = spawnSync('forge', ['script', 'script/DeployArc.s.sol:DeployArc', '--rpc-url', rpc, '--sender', deployer, '--unlocked', '--broadcast', '--slow', '--non-interactive'], {
   cwd: new URL('../contracts', import.meta.url), env, stdio: 'inherit', windowsHide: true,
 });
 if (deployment.error || deployment.status !== 0) throw deployment.error || new Error('Local deployment failed');
