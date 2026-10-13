@@ -123,7 +123,7 @@ export function Certificate({
         <Rosette className="certificate-rosette" />
         <span className="eyebrow">Illustrative allocation, not a funded position</span>
         <strong>
-          <span className="mono">100 DemoUSD</span>
+          <span className="mono">100 USDC</span>
         </strong>
         <div className="performance">Fixed demo prices. No yield.</div>
       </div>

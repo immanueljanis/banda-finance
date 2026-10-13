@@ -1,6 +1,10 @@
 "use client";
 import { useWallet } from "./wallet";
 import { DEPLOYED, explorerTx } from "@/lib/chain/arc";
+/** Settlement token label; the badge keeps it distinct from real USDC used for gas. */
+export function Usdc() {
+  return <>USDC<span className="test-badge">test</span></>;
+}
 export function DemoStatus() {
   const wallet = useWallet();
   return <div className="demo-status" aria-live="polite">
