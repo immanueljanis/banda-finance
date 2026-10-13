@@ -14,10 +14,10 @@ function address(value: string | null | undefined): Address {
 export const CONTRACTS = {
   diamond: address(process.env.NEXT_PUBLIC_ARC_DIAMOND || manifest.diamond),
   demoUSD: address(process.env.NEXT_PUBLIC_ARC_DEMO_USD || manifest.demoUSD),
-  router: address(process.env.NEXT_PUBLIC_ARC_ROUTER || manifest.router),
 };
 export const DEPLOYED = Object.values(CONTRACTS).every(a => a !== zeroAddress) && CONTRACTS.demoUSD !== REAL_USDC;
-export const DISCLOSURE = "Arc Mainnet Proof of Concept. All portfolio assets and valuations are simulated and have no real-world backing or monetary value.";
+/** Display name of the settlement token. The "test" badge marks it apart from real USDC, which pays Arc gas. */
+export const SETTLEMENT_SYMBOL = "USDC";
 export const explorerAddress = (value: string) => `${ARC.blockExplorers.default.url}/address/${value}`;
 export const explorerTx = (value: string) => `${ARC.blockExplorers.default.url}/tx/${value}`;
 // Same USDC balance, two interfaces. Never add these representations together.
