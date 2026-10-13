@@ -15,15 +15,15 @@ export default function Home() {
         <div className="wrap hero">
           <div className="hero-copy">
             <h1>Composable portfolios onchain. <span>One token, every asset inside.</span></h1>
-            <p className="hero-lede">Banda demonstrates real portfolio ownership on Arc. Deposit valueless DemoUSD, receive a Basket NFT, and inspect the simulated assets held in its own onchain vault.</p>
+            <p className="hero-lede">Deposit USDC on Arc, receive a Basket NFT, and see every asset held in its own onchain vault.</p>
             <dl className="hero-engines">
               <div>
                 <dt><i className="category-0" aria-hidden="true" />Ownership</dt>
-                <dd>An NFT controls a vault holding simulated portfolio tokens.</dd>
+                <dd>An NFT controls a vault holding the Basket&apos;s portfolio tokens.</dd>
               </div>
               <div>
-                <dt><i className="category-2" aria-hidden="true" />Simulation</dt>
-                <dd>Fixed simulated prices. No interest, market purchases or real-world backing.</dd>
+                <dt><i className="category-2" aria-hidden="true" />Allocation</dt>
+                <dd>Every deposit is split across the Basket&apos;s assets by fixed weights.</dd>
               </div>
             </dl>
             <div className="hero-actions">
@@ -57,15 +57,15 @@ export default function Home() {
           <dl className="anatomy-sleeves">
             <div>
               <dt><i className="category-0" aria-hidden="true" />Ownership</dt>
-              <dd>An NFT controls a vault holding simulated portfolio tokens.</dd>
+              <dd>An NFT controls a vault holding the Basket&apos;s portfolio tokens.</dd>
             </div>
             <div>
-              <dt><i className="category-2" aria-hidden="true" />Simulation</dt>
-              <dd>Fixed simulated prices. No interest, market purchases or real-world backing.</dd>
+              <dt><i className="category-2" aria-hidden="true" />Allocation</dt>
+              <dd>Every deposit is split across the Basket&apos;s assets by fixed weights.</dd>
             </div>
             <div>
               <dt><i className="category-1" aria-hidden="true" />Redemption</dt>
-              <dd>Full redemption burns issued mock holdings and returns deposited DemoUSD.</dd>
+              <dd>Redeeming closes the Basket and returns your full deposit.</dd>
             </div>
           </dl>
         </div>
@@ -127,22 +127,22 @@ export default function Home() {
 
       <section className="steps-section" id="how-it-works" aria-labelledby="steps-title">
         <div className="wrap">
-          <h2 id="steps-title">From demo credits to onchain custody.</h2>
+          <h2 id="steps-title">From deposit to onchain custody.</h2>
           <ol className="steps">
             <li>
               <span className="step-number mono">1</span>
               <h3>Choose a theme</h3>
-              <p>Explore the five themes. NEURAL is the supported proof of concept.</p>
+              <p>Pick one of five themed Baskets.</p>
             </li>
             <li>
               <span className="step-number mono">2</span>
-              <h3>Deposit DemoUSD</h3>
-              <p>Connect a wallet, claim limited DemoUSD, then deposit at least 10 credits.</p>
+              <h3>Deposit USDC</h3>
+              <p>Connect a wallet and deposit at least 10 USDC.</p>
             </li>
             <li>
               <span className="step-number mono">3</span>
               <h3>Hold, send or withdraw</h3>
-              <p>Inspect the token bound account and fully redeem your demo credits.</p>
+              <p>Inspect the token bound account and redeem your deposit any time.</p>
             </li>
           </ol>
           <Link className="text-link" href="/docs">
@@ -158,7 +158,7 @@ export default function Home() {
             <span>0% to buy.</span> <span>0% to withdraw.</span>
           </h2>
           <p>
-            Zero protocol fees in this demo. Real USDC pays only Arc network gas. Never approve real USDC to obtain demo assets.
+            Zero protocol fees. You only pay Arc network gas.
           </p>
           <Link className="text-link" href="/docs">
             Read the details <span aria-hidden="true">→</span>
@@ -176,7 +176,7 @@ export default function Home() {
             </tbody>
           </table>
           <p className="fee-note">
-            DemoUSD is reserved in the router. Fixed prices allocate synthetic holdings; no investment return or yield is promised.
+            Your deposit stays reserved for redemption. No investment return or yield is promised.
           </p>
         </div>
       </section>
