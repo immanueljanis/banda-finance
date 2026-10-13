@@ -47,7 +47,7 @@ export function Header() {
         <Link href="/docs">
           Docs <span aria-hidden="true">↗</span>
         </Link>
-        <Link href="/pitch">Pitch</Link>
+        <Link href="/mint">Demo faucet</Link>
       </nav>
       <div className="header-actions">
         <button
@@ -59,9 +59,9 @@ export function Header() {
         </button>
         {wallet.connected ? (
           <>
-            <Link className="wallet-balance" href="/portfolio" aria-label={`${wallet.balanceLabel} USDG available`}>
+            <Link className="wallet-balance" href="/portfolio" aria-label={`${wallet.balanceLabel} DemoUSD available`}>
               <span className="wallet-balance-value">{wallet.portfolioStatus === "ready" ? wallet.balanceLabel : <span className="value-skeleton" aria-label="Loading balance" />}</span>
-              <span className="wallet-balance-label">USDG</span>
+              <span className="wallet-balance-label">DemoUSD</span>
             </Link>
             <Link className="wallet-button" href="/portfolio">
               Portfolio ↗
@@ -96,12 +96,8 @@ export function Footer() {
         <Link href="/#fees">Fees ↗</Link>
       </div>
       <div className="footer-note">
-        This is a test version of Banda with test money. Nothing here has real value.
-        <p>
-          It runs on the Robinhood Chain test network. Holdings are practice
-          versions of real assets, bought and sold at live market prices. Past
-          comparisons are hypothetical examples based on real prices.
-        </p>
+        Demo assets have no monetary value. Real USDC is used only for Arc network gas.
+        <p>Fixed simulated prices. No backing, liquidity, yield or real-USDC redemption.</p>
         <span className="mono">© 2026 Banda</span>
       </div>
     </footer>

@@ -1,4 +1,18 @@
 @import "tailwindcss";
+.demo-disclosure { padding: 12px 5%; background: var(--surface); color: var(--ink); border-bottom: 1px solid var(--rule); font-size: 14px; line-height: 1.5; }
+.demo-status { margin-block: 18px; overflow-wrap: anywhere; }
+.demo-status [role="alert"] { border: 1px solid currentColor; padding: 12px; }
+.arc-portfolio, .arc-docs { padding-block: 48px; }
+.arc-docs { max-width: 75ch; }
+.arc-docs h2 { margin-top: 32px; }
+.arc-docs p, .arc-docs ol { margin-block: 16px; line-height: 1.7; }
+.arc-position { padding-block: 32px; border-bottom: 1px solid var(--rule); }
+.arc-details { margin-block: 24px; }
+.arc-details div { margin-block: 12px; }
+.arc-details dd, .arc-address { overflow-wrap: anywhere; }
+.arc-table-scroll { overflow-x: auto; }
+.arc-position p { margin-block: 20px; }
+.buy-panel button:disabled { opacity: .55; cursor: not-allowed; }
 /* Wallet and redemption controls use the shared Banda surface tokens. */
 .header-actions .wallet-balance {
   display: inline-flex;
