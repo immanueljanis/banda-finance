@@ -162,7 +162,7 @@ export default function Portfolio() {
         <>
           <div className="portfolio-summary">
             <div>
-              <span className="eyebrow">AVAILABLE USDG</span>
+              <span className="eyebrow">AVAILABLE USDC</span>
               <strong className="portfolio-balance mono">
                 {wallet.balanceLabel}
               </strong>
@@ -245,8 +245,8 @@ export default function Portfolio() {
         </>
       )}
       <p className="muted">
-        Your balance and Baskets are read from the Robinhood Chain test
-        network. This is a test version with test money. Nothing here has real
+        Your balance and Baskets are read from Arc
+        Mainnet. This is a test version with test money. Nothing here has real
         value. Banda never sees your wallet’s private key.
       </p>
       <LiveChainStatus />

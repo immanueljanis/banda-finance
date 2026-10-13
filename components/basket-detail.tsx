@@ -68,8 +68,8 @@ export function BasketDetail({ basket }: { basket: Basket }) {
           <WaveBand className="terms-wave" />
           <span className="certificate-kind">Buy</span>
           <h2>Buy {basket.name}</h2>
-          <p>Choose an amount in USDG, a digital dollar. You get one Basket that holds the whole mix.</p>
-          <label htmlFor="amount">Amount in USDG</label>
+          <p>Choose an amount in USDC, a digital dollar. You get one Basket that holds the whole mix.</p>
+          <label htmlFor="amount">Amount in USDC</label>
           <input
             id="amount"
             inputMode="decimal"
@@ -106,7 +106,7 @@ export function BasketDetail({ basket }: { basket: Basket }) {
           </div>
           <p>
             Available balance:{" "}
-            <span className="mono">{money(wallet.balance)} USDG</span>
+            <span className="mono">{money(wallet.balance)} USDC</span>
           </p>
           <div className="buy-preview">
             You get <span className="mono">1</span> Basket worth{" "}
@@ -146,9 +146,9 @@ export function BasketDetail({ basket }: { basket: Basket }) {
             <p role="alert">That is more than your available balance.</p>
           )}
           <p>
-            This is a test version using Paxos’ testnet USDG. Nothing here has real value.
+            This is a test version using test USDC on Arc Mainnet. Nothing here has real value.
             Buying takes two approvals in your wallet: first you let Banda use your
-            USDG, then you make the deposit. Each holding goes into your Basket’s own
+            USDC, then you make the deposit. Each holding goes into your Basket’s own
             vault as a practice version of the real asset, bought and sold at live
             market prices.
           </p>

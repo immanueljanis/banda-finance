@@ -59,9 +59,9 @@ export function Header() {
         </button>
         {wallet.connected ? (
           <>
-            <Link className="wallet-balance" href="/portfolio" aria-label={`${wallet.balanceLabel} USDG available`}>
+            <Link className="wallet-balance" href="/portfolio" aria-label={`${wallet.balanceLabel} USDC available`}>
               <span className="wallet-balance-value">{wallet.portfolioStatus === "ready" ? wallet.balanceLabel : <span className="value-skeleton" aria-label="Loading balance" />}</span>
-              <span className="wallet-balance-label">USDG</span>
+              <span className="wallet-balance-label">USDC</span>
             </Link>
             <Link className="wallet-button" href="/portfolio">
               Portfolio ↗
@@ -98,7 +98,7 @@ export function Footer() {
       <div className="footer-note">
         This is a test version of Banda with test money. Nothing here has real value.
         <p>
-          It runs on the Robinhood Chain test network. Holdings are practice
+          It runs on Arc Mainnet. Holdings are practice
           versions of real assets, bought and sold at live market prices. Past
           comparisons are hypothetical examples based on real prices.
         </p>

@@ -17,7 +17,7 @@ export default function Home() {
             <h1>Composable ETFs onchain. <span>One token, every asset inside.</span></h1>
             <p className="hero-lede">
               Banda turns a mix of stocks, crypto and gold into one token you
-              own. Deposit USDG, a digital dollar, and your Basket’s own vault
+              own. Deposit USDC, a digital dollar, and your Basket’s own vault
               holds every asset inside. It is
               built to earn in two ways, so you are not relying on prices alone.
             </p>
@@ -155,13 +155,13 @@ export default function Home() {
             </li>
             <li>
               <span className="step-number mono">2</span>
-              <h3>Deposit USDG</h3>
-              <p>Sign in with email, Google or your own wallet. Deposit USDG, a digital dollar, and your Basket is created for you.</p>
+              <h3>Deposit USDC</h3>
+              <p>Sign in with email, Google or your own wallet. Deposit USDC, a digital dollar, and your Basket is created for you.</p>
             </li>
             <li>
               <span className="step-number mono">3</span>
               <h3>Hold, send or withdraw</h3>
-              <p>Track it in your portfolio. Withdraw any part of it back to USDG at any time.</p>
+              <p>Track it in your portfolio. Withdraw any part of it back to USDC at any time.</p>
             </li>
           </ol>
           <Link className="text-link" href="/docs">

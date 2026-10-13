@@ -56,9 +56,9 @@ export function RedeemPanel({ position, valuation }: { position: WalletPosition;
     <div className="redemption-presets">{[25,50,75,100].map(value => <button key={value} type="button" disabled={busy} aria-pressed={percentage === value} onClick={() => { engage(); setPercentage(value); }}>{value === 100 ? "Everything" : `${value}%`}</button>)}</div>
     <dl className="redemption-summary">
       <div><dt>Units to withdraw</dt><dd>{shares}</dd></div>
-      <div><dt>Yearly fee so far</dt><dd>{quote ? formatUnits(quote[1], 6) + " USDG" : estimated ? "0.25% a year, exact amount when you withdraw" : skeleton}</dd></div>
-      <div className="redemption-payout"><dt>You get about</dt><dd>{amount(quote?.[2], estimate)} <small>USDG</small></dd></div>
-      <div><dt>You get at least this, or nothing happens</dt><dd>{amount(quote ? quote[2] * BigInt(995) / BigInt(1000) : undefined, estimate === undefined ? undefined : estimate * BigInt(995) / BigInt(1000), " USDG")}</dd></div>
+      <div><dt>Yearly fee so far</dt><dd>{quote ? formatUnits(quote[1], 6) + " USDC" : estimated ? "0.25% a year, exact amount when you withdraw" : skeleton}</dd></div>
+      <div className="redemption-payout"><dt>You get about</dt><dd>{amount(quote?.[2], estimate)} <small>USDC</small></dd></div>
+      <div><dt>You get at least this, or nothing happens</dt><dd>{amount(quote ? quote[2] * BigInt(995) / BigInt(1000) : undefined, estimate === undefined ? undefined : estimate * BigInt(995) / BigInt(1000), " USDC")}</dd></div>
     </dl>
     <p className="redemption-note">{percentage === 100 ? "Withdraws everything and closes this Basket." : `Your Basket stays open with the other ${100 - percentage}%.`}</p>
     <button type="button" className="primary-button redemption-submit" disabled={busy || units === BigInt(0) || (quote !== undefined && quote[2] <= BigInt(0))} onClick={async () => {
@@ -66,6 +66,6 @@ export function RedeemPanel({ position, valuation }: { position: WalletPosition;
       setRevision(value => value + 1);
     }}>{busy ? wallet.transactionStatus === "preparing" ? "Getting the latest prices…" : wallet.transactionStatus === "signing" ? "Approve in your wallet…" : "Confirming…" : percentage === 100 ? "Withdraw everything" : `Withdraw ${percentage}%`}</button>
     <p role="status" className="redemption-note">{quote ? "The money goes to the wallet that owns this Basket." : estimated ? "Estimate based on the last prices. We check the latest prices and show the exact amount when you withdraw." : status === "unavailable" ? "You see the exact amount when you withdraw." : "Checking what you would get…"}</p>
-    <p className="redemption-note">You get your holdings’ value at live market prices, paid in USDG.</p>
+    <p className="redemption-note">You get your holdings’ value at live market prices, paid in USDC.</p>
   </section>;
 }

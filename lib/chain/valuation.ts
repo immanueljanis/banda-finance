@@ -32,7 +32,7 @@ const abi = parseAbi([
   "function balanceOf(address) view returns (uint256)",
   "function feeState(uint256) view returns (uint128,uint40,uint256)",
 ]);
-const tickerOf = (symbol: string) => (symbol === "WETH" ? "ETH" : symbol === "tUSDG" ? "USDG" : symbol);
+const tickerOf = (symbol: string) => (symbol === "WETH" ? "ETH" : symbol === "tUSDC" ? "USDG" : symbol);
 
 /**
  * Values a Basket from what its ERC-6551 account actually holds, at the prices the pool last published.

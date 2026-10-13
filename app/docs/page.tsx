@@ -52,8 +52,8 @@ export default function Docs() {
           <h2>Buying and withdrawing</h2>
           <p>
             Buying takes two approvals in your wallet: first you let Banda use
-            your USDG, then you make the deposit and get your Basket. You can
-            withdraw any part of a Basket back to USDG at any time. Withdraw
+            your USDC, then you make the deposit and get your Basket. You can
+            withdraw any part of a Basket back to USDC at any time. Withdraw
             part and your Basket stays open. Withdraw everything and it closes.
             If deposits are ever paused, you can still withdraw.
           </p>
@@ -95,7 +95,7 @@ export default function Docs() {
         <section>
           <h2>About the figures</h2>
           <p>
-            Test USDG has no value. Basket values on the home and Basket pages
+            Test USDC has no value. Basket values on the home and Basket pages
             are examples. Past comparisons use real daily prices from June to
             September 2025 with a hypothetical mix; open Methodology in a
             Basket’s Historical tab for the assumptions and sources. The income
