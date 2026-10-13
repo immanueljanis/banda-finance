@@ -95,13 +95,15 @@ function DemoWallet({children,connection}: {children:ReactNode;connection:Connec
     catch(e){if(request===generation.current){setPortfolioStatus("error");setError(e instanceof Error?e.message:"Unable to read portfolio");}}
   },[address]);
   useEffect(()=>{setError(undefined);setLastHash(undefined);void load();return()=>{++generation.current;};},[load]);
-  const fail=(e:unknown)=>{const raw=e instanceof Error?e.message:"Transaction failed";const message=/daily limit/i.test(raw)?"Demo faucet limit: wait 24 hours before claiming again.":/lifetime limit/i.test(raw)?"This wallet has reached its 5,000 DemoUSD lifetime limit.":/insufficient funds/i.test(raw)?"This wallet needs native USDC for Arc network gas.":/user rejected|user denied/i.test(raw)?"Request cancelled in your wallet.":raw.split("\n").filter(Boolean).slice(0,2).join(" ");setError(message);return new Error(message);};
+  const fail=(e:unknown)=>{const raw=e instanceof Error?e.message:"Transaction failed";const message=/daily limit/i.test(raw)?"Faucet limit: wait 24 hours before claiming again.":/lifetime limit/i.test(raw)?"This wallet has reached its 5,000 test USDC lifetime limit.":/insufficient funds/i.test(raw)?"This wallet needs native USDC for Arc network gas.":/user rejected|user denied/i.test(raw)?"Request cancelled in your wallet.":raw.split("\n").filter(Boolean).slice(0,2).join(" ");setError(message);return new Error(message);};
   async function client(){
     if(!address)throw new Error("Connect a wallet first");
     await assertDemoDeployment();
     const p=await connection.provider();
     try {await p.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x13b2"}]});}
     catch(e){if((e as {code?:number}).code!==4902)throw e;await p.request({method:"wallet_addEthereumChain",params:[{chainId:"0x13b2",chainName:ARC.name,nativeCurrency:ARC.nativeCurrency,rpcUrls:[...ARC.rpcUrls.default.http],blockExplorerUrls:[ARC.blockExplorers.default.url]}]});await p.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x13b2"}]});}
+    const walletCode=await p.request({method:"eth_getCode",params:[CONTRACTS.diamond,"latest"]});
+    if(!walletCode||walletCode==="0x")throw new Error("Your wallet's network has no Banda contracts. Point the wallet's Arc network at the same RPC as this app and retry.");
     const accounts=await p.request({method:"eth_accounts"});
     if(accounts[0]?.toLowerCase()!==address.toLowerCase())throw new Error("Wallet account changed. Reconnect and retry.");
     return createWalletClient({account:address,chain:ARC,transport:custom(p)});
@@ -140,12 +142,12 @@ function DemoWallet({children,connection}: {children:ReactNode;connection:Connec
     refreshPortfolio:()=>{void load();}, transactionStatus, warmUp:()=>{},warmRedemption:async()=>{},previewRedemption,
     claim:()=>transaction(c=>send(c,CONTRACTS.demoUSD,"claim")),
     deposit:async(strategyId,amount)=>transaction(async c=>{
-      if(strategyId!==1)throw new Error("Only NEURAL is supported in this proof of concept.");
+      if(!Number.isInteger(strategyId)||strategyId<1||strategyId>5)throw new Error("Unknown Basket.");
       if(!/^\d+(\.\d{1,6})?$/.test(amount))throw new Error("Use up to six decimal places.");
-      const units=parseUnits(amount,6);if(units<BigInt(10e6))throw new Error("Minimum deposit is 10 DemoUSD.");
+      const units=parseUnits(amount,6);if(units<BigInt(10e6))throw new Error("Minimum deposit is 10 USDC.");
       const allowance=await demoClient.readContract({address:CONTRACTS.demoUSD,abi:demoAbi,functionName:"allowance",args:[c.account.address,CONTRACTS.diamond]});
       if(allowance<units)await send(c,CONTRACTS.demoUSD,"approve",[CONTRACTS.diamond,units]);
-      return send(c,CONTRACTS.diamond,"deposit",[1,units]);
+      return send(c,CONTRACTS.diamond,"deposit",[strategyId,units]);
     }),
     redeem:async(tokenId,shares)=>transaction(async c=>{
       const units=parseUnits(shares,6);
