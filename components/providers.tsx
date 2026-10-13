@@ -3,7 +3,7 @@
 import { PrivyProvider } from "@privy-io/react-auth";
 import type { ReactNode } from "react";
 import { FallbackWalletProvider, WalletProvider } from "@/components/wallet";
-import { ROBINHOOD_TESTNET } from "@/lib/chain/config";
+import { ARC } from "@/lib/chain/arc";
 import { ToastProvider } from "@/components/toast";
 
 export function Providers({ children }: { children: ReactNode }) {
@@ -16,8 +16,8 @@ export function Providers({ children }: { children: ReactNode }) {
       appId={appId}
       config={{
         loginMethods: ["email", "google", "wallet"],
-        supportedChains: [ROBINHOOD_TESTNET],
-        defaultChain: ROBINHOOD_TESTNET,
+        supportedChains: [ARC],
+        defaultChain: ARC,
         embeddedWallets: { ethereum: { createOnLogin: "all-users" } },
         appearance: { theme: "light", accentColor: "#0e4f37" },
       }}
