@@ -22,7 +22,9 @@ export function AssetLabel({
 }) {
   const [open, setOpen] = useState(false);
   const wasOpen = useRef(false);
-  const asset = ASSETS[ticker];
+  const original = ASSETS[ticker];
+  const displayTicker = ticker === "USDG" ? "mCASH" : `m${ticker}`;
+  const asset = { ...original, name: ticker === "USDG" ? "Simulated Cash" : `Simulated ${original.name}`, description: "Demo-only exposure. No real-world backing, monetary value, yield or redemption rights for real USDC." };
   return (
     <Tooltip.Provider delayDuration={180}>
       <Tooltip.Root open={open}>
@@ -30,7 +32,7 @@ export function AssetLabel({
           <button
             type="button"
             className={`asset-label ${compact ? "asset-compact" : ""}`}
-            aria-label={`About ${ticker}: ${asset.name}`}
+            aria-label={`About ${displayTicker}: ${asset.name}`}
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
             onFocus={() => setOpen(true)}
@@ -51,11 +53,11 @@ export function AssetLabel({
             <AssetLogo ticker={ticker} />
             <span>
               {compact ? (
-                <span className="mono">{ticker}</span>
+                <span className="mono">{displayTicker}</span>
               ) : (
                 <>
                   <strong>{asset.name}</strong>
-                  <small className="mono">{ticker}</small>
+                  <small className="mono">{displayTicker}</small>
                 </>
               )}
             </span>
@@ -73,10 +75,10 @@ export function AssetLabel({
             collisionPadding={16}
           >
             <strong>
-              {asset.name} <span className="mono">({ticker})</span>
+              {asset.name} <span className="mono">({displayTicker})</span>
             </strong>
             <p>{asset.description}</p>
-            {ASSET_FACTS[ticker]?.yield && (
+            {false && ASSET_FACTS[ticker]?.yield && (
               <p>
                 <b>{ASSET_FACTS[ticker].yield!.label}.</b>{" "}
                 {ASSET_FACTS[ticker].yield!.detail}
