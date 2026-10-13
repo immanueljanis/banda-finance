@@ -106,13 +106,31 @@ contract BandaArcTest is ArcDeployment {
         require(deployedRouter.shareBalance(account) == 10e6, "rollback");
     }
     function testInvalidAllocationAndRealUSDCRejected() public {
-        uint16[] memory w = new uint16[](6); uint256[] memory p = new uint256[](6);
-        for(uint256 i; i < 6; ++i) { w[i]=1000; p[i]=1e6; }
-        try new MockPortfolioRouter(deployedSettlement, address(deployedDiamond), w, p) { revert("bad weights accepted"); } catch {}
+        uint16[] memory w = new uint16[](6); uint256[] memory p = new uint256[](6); string[] memory s = new string[](6);
+        for(uint256 i; i < 6; ++i) { w[i]=1000; p[i]=1e6; s[i]="mX"; }
+        try new MockPortfolioRouter(deployedSettlement, address(deployedDiamond), s, w, p) { revert("bad weights accepted"); } catch {}
         w[5]=5000; p[0]=0;
-        try new MockPortfolioRouter(deployedSettlement, address(deployedDiamond), w, p) { revert("zero price accepted"); } catch {}
+        try new MockPortfolioRouter(deployedSettlement, address(deployedDiamond), s, w, p) { revert("zero price accepted"); } catch {}
         p[0]=1e6;
-        try new MockPortfolioRouter(DemoUSD(0x3600000000000000000000000000000000000000), address(deployedDiamond), w, p) { revert("real USDC accepted"); } catch {}
+        try new MockPortfolioRouter(DemoUSD(0x3600000000000000000000000000000000000000), address(deployedDiamond), s, w, p) { revert("real USDC accepted"); } catch {}
+        string[] memory short = new string[](5);
+        try new MockPortfolioRouter(deployedSettlement, address(deployedDiamond), short, w, p) { revert("symbol mismatch accepted"); } catch {}
+    }
+    function testEveryCatalogueBasketDepositsAndRedeemsExactly() public {
+        require(deployedRouters.length == 5, "five baskets");
+        for (uint32 id = 1; id <= 5; ++id) {
+            MockPortfolioRouter router = deployedRouters[id - 1];
+            (address[] memory tokens, uint16[] memory weights) = router.legs();
+            uint256 total;
+            for (uint256 i; i < weights.length; ++i) total += weights[i];
+            require(total == 10_000 && keccak256(bytes(DemoToken(tokens[tokens.length - 1]).symbol())) == keccak256("mCASH"), "cash sleeve last");
+            vm.prank(ALICE);
+            (uint256 tokenId, address account,) = DepositFacet(address(deployedDiamond)).deposit(id, 10e6);
+            for (uint256 i; i < tokens.length; ++i) require(DemoToken(tokens[i]).balanceOf(account) != 0, "leg funded");
+            vm.prank(ALICE); RedeemFacet(address(deployedDiamond)).redeem(tokenId, 10e6, 10e6);
+            require(router.totalLiability() == 0, "liability cleared");
+        }
+        require(deployedSettlement.balanceOf(ALICE) == 1000e6, "exact principal");
     }
     function testDirectRouterAndMockMintDenied() public {
         (address[] memory tokens,) = deployedRouter.legs();
