@@ -3,11 +3,17 @@
   "status": "local-rehearsal",
   "diamond": "0xbc9f1d60d48258dddb375edd3e25268b43a06b23",
   "demoUSD": "0x8541754d086fe51b55c06a625da33a05d693957c",
-  "router": "0xefa0c1b2bc31345d7d795e0786968a607b5c6230",
+  "routers": [
+    "0xefa0c1b2bc31345d7d795e0786968a607b5c6230",
+    "0x0738d88418c625e82364c75a1160f4faa5fdb90e",
+    "0x2b0918b51587178d2a57c58d2d972069ee5a4360",
+    "0x578f94d870940064bd6bfb1a6f782b25e79a565d",
+    "0x447463e069d80cec7b55fac5f8e8a4783f806a72"
+  ],
   "registry": "0x000000006551c19487814612e58FE06813775758",
   "registryAdapter": "0xd387ad52d5e5ab43d32975853a6a53ee2cd00328",
   "accountImplementation": "0x287443027c8b97e29408e6395993333bf9b369f5",
-  "navAdapter": "0x0738d88418c625e82364c75a1160f4faa5fdb90e",
+  "navAdapter": "0xb283ea18875eed8391d973f7ad80b97075876bbd",
   "deploymentBlock": "1",
   "transactions": [
     {
@@ -18,158 +24,344 @@
       "explorer": null
     },
     {
-      "hash": "0x7d16e607bf977da9c7c1a772c594611da4b563cd71fee28688e4a3aa6dcf191f",
+      "hash": "0xb018ddae6b90e7f56776c6aff3ffaab5a25d31a9d718a4e77c5e40a07637a3db",
       "blockNumber": "2",
       "contract": "DemoUSD",
-      "address": "0xd387ad52d5e5ab43d32975853a6a53ee2cd00328",
-      "explorer": null
-    },
-    {
-      "hash": "0xc5151ce80e4f905e8854ad2a1b75a4461926e4382533c2db6f9dff6d7e1b3434",
-      "blockNumber": "2",
-      "contract": "RegistryAdapter",
       "address": "0x8541754d086fe51b55c06a625da33a05d693957c",
       "explorer": null
     },
     {
-      "hash": "0x1c3f9c55a5bb4c5c327e179fdc1a81b031d9d51ba46a1b5789d436f4ac455a5a",
-      "blockNumber": "2",
-      "contract": "ArcBasketAccount",
-      "address": "0x6a06be1e2af61811fc1323f027946a09edf9bed1",
-      "explorer": null
-    },
-    {
-      "hash": "0x4f022d0afc41a05aa7f45f62f8a0ccd16a89225d30f24b65e8336da6473d0731",
+      "hash": "0x7d16e607bf977da9c7c1a772c594611da4b563cd71fee28688e4a3aa6dcf191f",
       "blockNumber": "3",
-      "contract": "BandaInit",
-      "address": "0xefa0c1b2bc31345d7d795e0786968a607b5c6230",
+      "contract": "RegistryAdapter",
+      "address": "0xd387ad52d5e5ab43d32975853a6a53ee2cd00328",
       "explorer": null
     },
     {
       "hash": "0x463e8a7f3db1601dd823cbca60d14a9a1500d5ae648a0dd54d69551db41452e1",
-      "blockNumber": "2",
-      "contract": "DiamondCutFacet",
+      "blockNumber": "4",
+      "contract": "ArcBasketAccount",
       "address": "0x287443027c8b97e29408e6395993333bf9b369f5",
       "explorer": null
     },
     {
+      "hash": "0x1c3f9c55a5bb4c5c327e179fdc1a81b031d9d51ba46a1b5789d436f4ac455a5a",
+      "blockNumber": "5",
+      "contract": "BandaInit",
+      "address": "0x6a06be1e2af61811fc1323f027946a09edf9bed1",
+      "explorer": null
+    },
+    {
       "hash": "0x754e4ee7205614a791710afad64e5ed5a0efaa6fc0f735ced640862e189b034e",
-      "blockNumber": "2",
-      "contract": "DiamondLoupeFacet",
+      "blockNumber": "6",
+      "contract": "DiamondCutFacet",
       "address": "0x8642f95ed9785afcd0c9f822fc91897e661e4a1f",
       "explorer": null
     },
     {
       "hash": "0x779a0ae0be3c85603c69cf7645a88e2c3060dbe6855daf65645c82881c063302",
-      "blockNumber": "2",
-      "contract": "OwnershipFacet",
+      "blockNumber": "7",
+      "contract": "DiamondLoupeFacet",
       "address": "0x34196d3debc549aa6239cbad37039840071aedb3",
       "explorer": null
     },
     {
-      "hash": "0x377fd8418447ea128cbb2a7bfd2dd492bfd96e45194cdb2f79db5df982fd6a15",
-      "blockNumber": "3",
+      "hash": "0x0c76dd161b02fe282fb665727e7b141a6546d7e521c3f405d23668ced107a95c",
+      "blockNumber": "8",
+      "contract": "OwnershipFacet",
+      "address": "0xf3a720cd23bba2da8bd9f979daef57df4764ad01",
+      "explorer": null
+    },
+    {
+      "hash": "0xf3f94c66d38d6bc0475bbbec1f493065b3f57a1e15517bf6a8df1caf0dc2783e",
+      "blockNumber": "9",
       "contract": "AdminFacet",
-      "address": "0x0738d88418c625e82364c75a1160f4faa5fdb90e",
+      "address": "0xd5215b5a2d43d29441dc3df84733a91ad6536a3f",
       "explorer": null
     },
     {
       "hash": "0x5fde077ff03f2fc14c1c4655c7762c069459e42c94269c66c671cbf68c7a3bb9",
-      "blockNumber": "3",
+      "blockNumber": "10",
       "contract": "BasketNFTFacet",
       "address": "0xf9568872c061c9461de6870fc0955230243ba84e",
       "explorer": null
     },
     {
-      "hash": "0xb60a7a0b78a19789b7450a347c2c4694c4e933db84da5911c1f229a5654c130e",
-      "blockNumber": "3",
-      "contract": "DepositFacet",
-      "address": "0xe960fd941c37d36a5c6ee8fe123c928625d1e02c",
-      "explorer": null
-    },
-    {
       "hash": "0x1b10a5973617ff2cbcd94959922466e98f61359a6c67c0261eb902168985910d",
-      "blockNumber": "3",
-      "contract": "BasketViewFacet",
+      "blockNumber": "11",
+      "contract": "DepositFacet",
       "address": "0xfc2896142e6e0155cb2446d0f78a880d657cc81a",
       "explorer": null
     },
     {
-      "hash": "0xf3f94c66d38d6bc0475bbbec1f493065b3f57a1e15517bf6a8df1caf0dc2783e",
-      "blockNumber": "3",
-      "contract": "RedeemFacet",
-      "address": "0xd5215b5a2d43d29441dc3df84733a91ad6536a3f",
-      "explorer": null
-    },
-    {
-      "hash": "0x0c76dd161b02fe282fb665727e7b141a6546d7e521c3f405d23668ced107a95c",
-      "blockNumber": "3",
-      "contract": "NavGuardFacet",
-      "address": "0xf3a720cd23bba2da8bd9f979daef57df4764ad01",
-      "explorer": null
-    },
-    {
-      "hash": "0xd7d9eee42e7283cc30b33c0f8dd004ae41f1882b4b42b44223c656912f711621",
-      "blockNumber": "3",
-      "contract": "Diamond",
-      "address": null,
+      "hash": "0xb60a7a0b78a19789b7450a347c2c4694c4e933db84da5911c1f229a5654c130e",
+      "blockNumber": "12",
+      "contract": "BasketViewFacet",
+      "address": "0xe960fd941c37d36a5c6ee8fe123c928625d1e02c",
       "explorer": null
     },
     {
       "hash": "0x5b94851b3563da3b35776f7a8c0ff67cf4d7858a12dad31de9b995c857b45a1b",
-      "blockNumber": "3",
-      "contract": "MockPortfolioRouter",
+      "blockNumber": "13",
+      "contract": "RedeemFacet",
       "address": "0xdfcaf4666c96b4b887b0fa7b30f05e9e5f1c3af0",
       "explorer": null
     },
     {
       "hash": "0x436867a4864d2d6f22d0c040056c63ffef42d982a3061a8ad928365c63df6729",
-      "blockNumber": "3",
-      "contract": "DemoNavAdapter",
+      "blockNumber": "14",
+      "contract": "NavGuardFacet",
       "address": "0x96d8593dbd35b49e78d4729d8fbe082f359c76a1",
       "explorer": null
     },
     {
-      "hash": "0xb3751c8f36290c3c6ef4a108b07f128b192295184fd055b7a2bfe5838c5e9b07",
-      "blockNumber": "3",
+      "hash": "0x67a6112bc9b1d1e05bf440e89a2bf6d0bce1dbada0c6a21e2712e59f47764939",
+      "blockNumber": "15",
+      "contract": "Diamond",
+      "address": "0xbc9f1d60d48258dddb375edd3e25268b43a06b23",
+      "explorer": null
+    },
+    {
+      "hash": "0x4b201f7b67a406be3edbe83dbbf9f67bc5841e4185444352bfbfc5ea372af84d",
+      "blockNumber": "16",
+      "contract": "MockPortfolioRouter",
+      "address": "0xefa0c1b2bc31345d7d795e0786968a607b5c6230",
+      "explorer": null
+    },
+    {
+      "hash": "0x428b1121f13b272aba8133e887e5cda42a0d630d4da85ec2e30dd1c60604165c",
+      "blockNumber": "17",
+      "contract": "MockPortfolioRouter",
+      "address": "0x0738d88418c625e82364c75a1160f4faa5fdb90e",
+      "explorer": null
+    },
+    {
+      "hash": "0xe664656cac80cda85c5284f70bc9f56b856c1381be8f3a4b6fb508effbb7f9c5",
+      "blockNumber": "18",
+      "contract": "MockPortfolioRouter",
+      "address": "0x2b0918b51587178d2a57c58d2d972069ee5a4360",
+      "explorer": null
+    },
+    {
+      "hash": "0x41664595189ae3f106c5fcada0291badd033b3bfaaea43700e5395d4084c9b22",
+      "blockNumber": "19",
+      "contract": "MockPortfolioRouter",
+      "address": "0x578f94d870940064bd6bfb1a6f782b25e79a565d",
+      "explorer": null
+    },
+    {
+      "hash": "0xda066b3ef5f90d49edc0592a98eed5d6266487212a276bf20db1650206dd9101",
+      "blockNumber": "20",
+      "contract": "MockPortfolioRouter",
+      "address": "0x447463e069d80cec7b55fac5f8e8a4783f806a72",
+      "explorer": null
+    },
+    {
+      "hash": "0x2210a6396771755faffbad9108d430b68e9503c9c2a15cffb3f9d12ec39d3361",
+      "blockNumber": "21",
+      "contract": "DemoNavAdapter",
+      "address": "0xb283ea18875eed8391d973f7ad80b97075876bbd",
+      "explorer": null
+    },
+    {
+      "hash": "0x8286bec66f7d4c17bd5272c1bb555bf0b4d678dd50c454ce22c062a5e89ef8c8",
+      "blockNumber": "22",
       "contract": "Diamond",
       "address": null,
       "explorer": null
     },
     {
-      "hash": "0x67a6112bc9b1d1e05bf440e89a2bf6d0bce1dbada0c6a21e2712e59f47764939",
-      "blockNumber": "3",
+      "hash": "0x0cc40aa1f481301fd848f4649b5320468fe631c556aaa8e3ca06476937dc1828",
+      "blockNumber": "23",
       "contract": "Diamond",
-      "address": "0xbc9f1d60d48258dddb375edd3e25268b43a06b23",
+      "address": null,
+      "explorer": null
+    },
+    {
+      "hash": "0x72fc288573368ce8da8d7be87154cc67607275b28a3f253fe963385c4acd3c10",
+      "blockNumber": "24",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": null
+    },
+    {
+      "hash": "0x33237592e7436efa7c957f013a9522c4138e387ce51ce1726c6ee9529b5e9bb2",
+      "blockNumber": "25",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": null
+    },
+    {
+      "hash": "0xddb8310c1b3baaaddb01d2b2e8e3fe6209d6cc28d9d0078d99c345f11b4c7af4",
+      "blockNumber": "26",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": null
+    },
+    {
+      "hash": "0x636fe82b61c476ff52f2e040158844d7ccdcb4ae4ba3c0901fdab8f981d6ceb4",
+      "blockNumber": "27",
+      "contract": "Diamond",
+      "address": null,
       "explorer": null
     }
   ],
   "verification": "pending",
   "owner": "0xc924D1236422Ccca9d08e78f059b574f443Ca29d",
-  "assets": [
+  "baskets": [
     {
-      "address": "0xFB7a1A29673F94Db6D4222606324646E6e8A8DEa",
-      "weightBps": 3000
+      "strategyId": 1,
+      "router": "0xefa0c1b2bc31345d7d795e0786968a607b5c6230",
+      "assets": [
+        {
+          "address": "0xFB7a1A29673F94Db6D4222606324646E6e8A8DEa",
+          "weightBps": 3000
+        },
+        {
+          "address": "0x71D022ef16476cAB42De87570DadC359f9dD2d69",
+          "weightBps": 2000
+        },
+        {
+          "address": "0x3dF59D6246dda0598DCeD3E2c54B51243861215D",
+          "weightBps": 1500
+        },
+        {
+          "address": "0xc6020AFD02090CE0154988beeD6c6098B2217EF8",
+          "weightBps": 1000
+        },
+        {
+          "address": "0x0E9395f52783E4a46D5418FfA8c965591c1Aa1b4",
+          "weightBps": 1000
+        },
+        {
+          "address": "0xF31056834704330a4C3F7ad47C813a74bcc96222",
+          "weightBps": 1500
+        }
+      ]
     },
     {
-      "address": "0x71D022ef16476cAB42De87570DadC359f9dD2d69",
-      "weightBps": 2000
+      "strategyId": 2,
+      "router": "0x0738d88418c625e82364c75a1160f4faa5fdb90e",
+      "assets": [
+        {
+          "address": "0xac302e5CD486C0d8d0398f9669243f405811F94b",
+          "weightBps": 2000
+        },
+        {
+          "address": "0xA937E21E347C976Faa0Bb2ddd4211c47368d9DD3",
+          "weightBps": 1500
+        },
+        {
+          "address": "0x6EcF6c7a721CCB903259B40F8CB3b8BB67cD808b",
+          "weightBps": 2000
+        },
+        {
+          "address": "0x3733928D8Fd1d55f5Df8b3a229BBA2BC53Ee63d7",
+          "weightBps": 1500
+        },
+        {
+          "address": "0x76C1057D0408674c400090191d0D4dDc2d5A6216",
+          "weightBps": 1000
+        },
+        {
+          "address": "0xcff6045ce2089699467f374f9bC52B200934CFA8",
+          "weightBps": 500
+        },
+        {
+          "address": "0xbaf8dd0099925c98eB20E87e7E4f0195c7102777",
+          "weightBps": 1500
+        }
+      ]
     },
     {
-      "address": "0x3dF59D6246dda0598DCeD3E2c54B51243861215D",
-      "weightBps": 1500
+      "strategyId": 3,
+      "router": "0x2b0918b51587178d2a57c58d2d972069ee5a4360",
+      "assets": [
+        {
+          "address": "0x2318483F2867BCeC2e548d7f198572964f4027e4",
+          "weightBps": 3000
+        },
+        {
+          "address": "0x48756848F8Ef3741d425f6ad413bD6D346BE64aB",
+          "weightBps": 2500
+        },
+        {
+          "address": "0x88be1faaa68E3d6d1684d4a6cb4b3FD14AC8f734",
+          "weightBps": 2000
+        },
+        {
+          "address": "0x327275d4ede2194D8896b31D750c5e2cf11B2576",
+          "weightBps": 1000
+        },
+        {
+          "address": "0x439A961a1d63B2dd1AE6FDF7b7C782A178CdA5f6",
+          "weightBps": 1500
+        }
+      ]
     },
     {
-      "address": "0xc6020AFD02090CE0154988beeD6c6098B2217EF8",
-      "weightBps": 1000
+      "strategyId": 4,
+      "router": "0x578f94d870940064bd6bfb1a6f782b25e79a565d",
+      "assets": [
+        {
+          "address": "0x1127ad3c2393D8c7391A7782a40BE784804D52a2",
+          "weightBps": 2500
+        },
+        {
+          "address": "0xcc3c45bDF21292699583a42d12dc5b1e594EabBD",
+          "weightBps": 1500
+        },
+        {
+          "address": "0xf1C797d9a32560C84455AbFedD4078FEc69E4809",
+          "weightBps": 1500
+        },
+        {
+          "address": "0x9D5dA819081b2EBadf9AA8394A711C24C35Cc946",
+          "weightBps": 1500
+        },
+        {
+          "address": "0x776Aba3C22aE1de581F759Dd85506b062ca7DA2b",
+          "weightBps": 1000
+        },
+        {
+          "address": "0x3C4273Ea84d49358Fc200DC461F8ebA0e427673F",
+          "weightBps": 500
+        },
+        {
+          "address": "0x758AA2987D28455fCCB563dB92D52eBcC8b63723",
+          "weightBps": 500
+        },
+        {
+          "address": "0x866F1043903102c77413711F2b6e6c735a94dE3C",
+          "weightBps": 1000
+        }
+      ]
     },
     {
-      "address": "0x0E9395f52783E4a46D5418FfA8c965591c1Aa1b4",
-      "weightBps": 1000
-    },
-    {
-      "address": "0xF31056834704330a4C3F7ad47C813a74bcc96222",
-      "weightBps": 1500
+      "strategyId": 5,
+      "router": "0x447463e069d80cec7b55fac5f8e8a4783f806a72",
+      "assets": [
+        {
+          "address": "0x89E06F5AB6A4B704bA74922f75790726698CFc12",
+          "weightBps": 3000
+        },
+        {
+          "address": "0xf86D5953670434Df553b72aB5e97a5Da581D8627",
+          "weightBps": 2000
+        },
+        {
+          "address": "0xcd8596547C9EB43Bd35a94A69B315e1e28949b26",
+          "weightBps": 1500
+        },
+        {
+          "address": "0xd1503aB9e3284D10F217214939f7f25b65646751",
+          "weightBps": 1000
+        },
+        {
+          "address": "0x1b01F1C6f253946AEA24916ED1E463137bE3907D",
+          "weightBps": 2500
+        }
+      ]
     }
   ]
 }
