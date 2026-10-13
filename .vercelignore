@@ -1,0 +1,6 @@
+contracts/
+.next-local/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.next/
