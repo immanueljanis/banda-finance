@@ -69,6 +69,7 @@ type Wallet = {
   refreshPortfolio: () => void;
   deposit: (strategyId: number, amount: string) => Promise<Hash>;
   redeem: (tokenId: string, shares: string) => Promise<Hash>;
+  claim: () => Promise<Hash>;
   warmUp: (strategyId: number) => void;
   warmRedemption: (tokenId: string) => Promise<void>;
   previewRedemption: (tokenId: string, shares: string) => Promise<readonly [bigint, bigint, bigint]>;
@@ -90,6 +91,7 @@ const fallbackValue: Wallet = {
   refreshPortfolio: () => undefined,
   deposit: async () => { throw new Error("Your wallet is not available right now."); },
   redeem: async () => { throw new Error("Your wallet is not available right now."); },
+  claim: async () => { throw new Error("Your wallet is not available right now."); },
   warmUp: () => undefined,
   warmRedemption: async () => undefined,
   previewRedemption: async () => { throw new Error("Connect a wallet first"); },
@@ -122,6 +124,7 @@ const redeemAbi = [
     outputs: [{ name: "assets", type: "uint256" }],
   },
 ] as const;
+const faucetAbi = parseAbi(["function claim()"]);
 const holdingsAbi = parseAbi([
   "function basket(uint256) view returns (uint32,address,uint128)",
   "function strategy(uint32) view returns (address,uint96,uint16,address,bool)",
@@ -317,7 +320,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   async function deposit(strategyId: number, amount: string): Promise<Hash> {
     if (!activeWallet || !address) throw new Error("Connect a wallet first");
     const amountUnits = parseUnits(amount, 6);
-    if (amountUnits <= BigInt(0)) throw new Error("Enter an amount above 0 USDG.");
+    if (amountUnits <= BigInt(0)) throw new Error("Enter an amount above 0 USDC.");
     if (!/^\d+(\.\d{1,6})?$/.test(amount)) throw new Error("Use up to six decimal places");
     if (transactionLock.current) throw new Error("A transaction is already in progress");
     transactionLock.current = true;
@@ -339,10 +342,10 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       ]);
       if (await receiptClient.readContract({address: ROBINHOOD_TESTNET.diamond, abi: guardAbi, functionName: "isPaused"})) throw new Error("Deposits are paused right now. You can still withdraw.");
       const [strategy, minimum, , , enabled] = await receiptClient.readContract({address: ROBINHOOD_TESTNET.diamond, abi: guardAbi, functionName: "strategy", args: [strategyId]});
-      if (!enabled || amountUnits < minimum) throw new Error(`Minimum deposit is ${formatUnits(minimum, 6)} USDG for this Basket.`);
+      if (!enabled || amountUnits < minimum) throw new Error(`Minimum deposit is ${formatUnits(minimum, 6)} USDC for this Basket.`);
       const tokenAbi = parseAbi(["function balanceOf(address) view returns (uint256)", "function allowance(address,address) view returns (uint256)"]);
       const balance = await receiptClient.readContract({address: ROBINHOOD_TESTNET.settlementAsset, abi: tokenAbi, functionName: "balanceOf", args: [address as Address]});
-      if (balance < amountUnits) throw new Error("Not enough USDG in this wallet. Get free testnet USDG from the Paxos faucet; the link is on the Get USDG page.");
+      if (balance < amountUnits) throw new Error("Not enough USDC in this wallet. Claim free test USDC on the Get USDC page.");
       const prepared = prepareNav(strategyId).then(() => null, (reason: unknown) => reason);
       const allowance = await receiptClient.readContract({address: ROBINHOOD_TESTNET.settlementAsset, abi: tokenAbi, functionName: "allowance", args: [address as Address, ROBINHOOD_TESTNET.diamond]});
       if (allowance < amountUnits) {
@@ -374,7 +377,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       const depositReceipt = await receiptClient.waitForTransactionReceipt({ hash: depositHash });
       if (depositReceipt.status !== "success") throw new Error("The deposit did not go through. No Basket was created.");
       setTransactionStatus("idle");
-      toast({ tone: "success", title: "Your Basket is ready", description: `${amount} USDG is now in your Basket.`, action: { label: "View portfolio", href: "/portfolio" } });
+      toast({ tone: "success", title: "Your Basket is ready", description: `${amount} USDC is now in your Basket.`, action: { label: "View portfolio", href: "/portfolio" } });
       void loadPortfolio();
       return depositHash;
     } catch (reason) {
@@ -388,7 +391,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     if (!activeWallet) throw new Error("Connect a wallet first");
     const provider = await activeWallet.getEthereumProvider();
     const client = createWalletClient({chain: ROBINHOOD_TESTNET, transport: custom(provider)}).extend(publicActions);
-    if (await client.getChainId() !== ROBINHOOD_TESTNET.id) throw new Error("Switch your wallet to the Robinhood Chain test network to see what you would get.");
+    if (await client.getChainId() !== ROBINHOOD_TESTNET.id) throw new Error("Switch your wallet to Arc Mainnet to see what you would get.");
     return marketPreview(client, BigInt(tokenId), parseUnits(shares, 6));
   }, [activeWallet]);
 
@@ -425,11 +428,40 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       const receipt = await receiptClient.waitForTransactionReceipt({ hash });
       if (receipt.status !== "success") throw new Error("The withdrawal did not go through. Nothing was taken from your Basket.");
       setTransactionStatus("idle");
-      toast({ tone: "success", title: "Withdrawal complete", description: "USDG was sent to your wallet.", action: explorerAction(hash) });
+      toast({ tone: "success", title: "Withdrawal complete", description: "USDC was sent to your wallet.", action: explorerAction(hash) });
       void loadPortfolio();
       return hash;
     } catch (reason) {
       throw fail("Withdrawal didn’t go through", reason);
+    } finally {
+      transactionLock.current = false;
+    }
+  }
+
+  /** Claims test USDC from the settlement token's faucet: 1,000 every 24 hours, up to 5,000 per wallet. */
+  async function claim(): Promise<Hash> {
+    if (!activeWallet || !address) throw new Error("Connect a wallet first");
+    if (transactionLock.current) throw new Error("A transaction is already in progress");
+    transactionLock.current = true;
+    setTransactionStatus("preparing");
+    setError(undefined);
+    try {
+      await activeWallet.switchChain(ROBINHOOD_TESTNET.id);
+      const provider = await activeWallet.getEthereumProvider();
+      const client = createWalletClient({ account: address as Address, chain: ROBINHOOD_TESTNET, transport: custom(provider) });
+      const receiptClient = client.extend(publicActions);
+      await receiptClient.simulateContract({ address: ROBINHOOD_TESTNET.settlementAsset, abi: faucetAbi, functionName: "claim", account: address as Address });
+      setTransactionStatus("signing");
+      const hash = await client.writeContract({ address: ROBINHOOD_TESTNET.settlementAsset, abi: faucetAbi, functionName: "claim" });
+      setTransactionStatus("confirming");
+      const receipt = await receiptClient.waitForTransactionReceipt({ hash });
+      if (receipt.status !== "success") throw new Error("The claim did not go through.");
+      setTransactionStatus("idle");
+      toast({ tone: "success", title: "Test USDC received", description: "1,000 test USDC was sent to your wallet.", action: explorerAction(hash) });
+      void loadPortfolio();
+      return hash;
+    } catch (reason) {
+      throw fail("Claim didn’t go through", reason);
     } finally {
       transactionLock.current = false;
     }
@@ -459,6 +491,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         },
         deposit,
         redeem,
+        claim,
         warmUp: (strategyId: number) => { void warm(`s${strategyId}`, () => prepareNav(strategyId)); },
         warmRedemption: (tokenId: string) => warm(`t${tokenId}`, () => prepareRedemption(tokenId)),
         previewRedemption,
