@@ -1,6 +1,4 @@
 "use client";
-import { DemoPortfolio } from "@/components/demo-portfolio";
-export default function Portfolio(){ return <DemoPortfolio/>; }
 import Link from "next/link";
 import { useWallet } from "@/components/wallet";
 import { LiveChainStatus } from "@/components/live-chain-status";
@@ -96,7 +94,7 @@ function PositionBody({ position, valuation, apy, now }: { position: WalletPosit
   );
 }
 
-function LegacyPortfolio() {
+export default function Portfolio() {
   const wallet = useWallet();
   const onchain = useValuations(wallet.positions, `${wallet.portfolioBlock ?? ""}`);
   const live = useLivePrices();
