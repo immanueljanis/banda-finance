@@ -1,5 +1,7 @@
 node_modules/
 .next/
+.next-local/
+contracts/*-stderr.log
 *.tsbuildinfo
 test-results/
 playwright-report/
