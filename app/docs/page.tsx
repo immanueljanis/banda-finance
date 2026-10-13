@@ -11,123 +11,46 @@ export default function Docs() {
             ← Back to Banda
           </Link>
           <h1>How Banda works.</h1>
-          <p>
-            Composable ETFs onchain: one token, every asset inside. This is a test
-            version of Banda with test money. Nothing here has real value.
-            Simple access does not remove investment risk.
-          </p>
+          <p>Real onchain portfolio ownership and custody on Arc, using valueless simulated assets. This proof of concept is not an investment product.</p>
         </div>
       </section>
       <div className="docs wrap">
         <section>
           <h2>What you own</h2>
-          <p>
-            A Basket is a token you own. It has its own vault, and the vault
-            holds every investment in the portfolio: stocks, crypto, gold and an
-            income portion in USDG, a digital dollar. Send your Basket to
-            someone and the whole portfolio goes with it, without selling
-            anything. On this test version, each holding is a clearly labelled
-            practice version of the real asset, bought and sold at live market
-            prices.
-          </p>
+          <p>A Basket is a transferable ERC-721 NFT controlling its own ERC-6551 account. The vault holds actual ERC-20 demo token balances. Transferring the NFT transfers control of the portfolio. No token represents a backed security or commodity.</p>
         </section>
         <section>
           <h2>Signing in</h2>
-          <p>
-            Sign in with your email, Google or a wallet you already use. That
-            wallet owns your Basket. The Basket’s vault is separate from your
-            wallet and only allows a short list of actions on the holdings.
-          </p>
+          <p>Connect MetaMask, Rabby or a configured Privy wallet. The NFT owner or an approved operator may redeem through the Diamond; payment always goes to the current NFT owner. Arbitrary vault withdrawals are disabled.</p>
         </section>
         <section>
           <h2>The five demo Baskets</h2>
-          <p>
-            NEURAL follows artificial intelligence, RAILS digital finance,
-            RESERVE a balanced core, FRONTIER future technology and FORTRESS
-            hard assets with income. Each mixes stocks, crypto or gold with an
-            income portion in USDG.
-          </p>
+          <p>NEURAL follows an AI theme and is the supported demo. RAILS, RESERVE, FRONTIER and FORTRESS remain catalogue previews with deposits disabled. All displayed exposures are simulated.</p>
         </section>
         <section>
-          <h2>Buying and withdrawing</h2>
-          <p>
-            Buying takes two approvals in your wallet: first you let Banda use
-            your USDG, then you make the deposit and get your Basket. You can
-            withdraw any part of a Basket back to USDG at any time. Withdraw
-            part and your Basket stays open. Withdraw everything and it closes.
-            If deposits are ever paused, you can still withdraw.
-          </p>
+          <h2>Depositing and redeeming</h2>
+          <p>Claim limited DemoUSD, approve an exact deposit amount, then deposit at least 10 credits. Each deposit creates a separate NFT. Full redemption burns the issued mock holdings and NFT, returning the exact deposited DemoUSD. Partial redemption is disabled. Pausing deposits does not block redemption.</p>
         </section>
         <section>
           <h2>Prices</h2>
-          <p>
-            Holdings are bought and sold at live market prices. Just before
-            your transaction, Banda checks that every price is recent. If a
-            price is too old, nothing happens and nothing is spent. When you
-            withdraw, you see the amount first. You get at least{" "}
-            <span className="mono">99.5%</span> of that amount, or nothing
-            happens.
-          </p>
+          <p>Prices are fixed demo parameters: mNVDA 100, mTAO 200, mGOOGL 150, mNEAR 5, mGLD 250 and mCASH 1 DemoUSD per token. These are synthetic accounting inputs, not market feeds. No yield or price appreciation is simulated.</p>
         </section>
         <section>
           <h2>Curation and risks</h2>
-          <p>
-            Banda curates the Baskets today and can only make a short list of changes to one,
-            within published limits. On this test version, admin control is not
-            yet shared between several people or delayed by a waiting period.
-            Prices can fall, and you may get back less than you put in. Software
-            bugs, price data, the services a Basket relies on and market
-            conditions all add risk. Spreading your money across assets does not
-            guarantee returns.
-          </p>
+          <p>The Diamond owner can upgrade facets, pause deposits and change NAV guard configuration. This is an unaudited prototype without a verified multisig or timelock. Do not send valuable assets into Basket accounts. Unrelated tokens can become stranded when the NFT is burned.</p>
         </section>
         <section>
           <h2>Fees</h2>
-          <p>
-            Every Basket has one yearly fee of{" "}
-            <span className="mono">0.25%</span>, fixed for the life of the
-            Basket. There is no performance fee, and buying or withdrawing costs{" "}
-            <span className="mono">0%</span>. The yearly fee is charged in tiny
-            amounts over time and taken only when you withdraw, so you always
-            see it before you approve.
-          </p>
+          <p>The demo has zero annual, deposit and redemption protocol fees. Arc network transactions require real USDC for gas. DemoUSD is a separate valueless ERC-20 and can never redeem for real USDC.</p>
         </section>
         <section>
           <h2>About the figures</h2>
-          <p>
-            Test USDG has no value. Basket values on the home and Basket pages
-            are examples. Past comparisons use real daily prices from June to
-            September 2025 with a hypothetical mix; open Methodology in a
-            Basket’s Historical tab for the assumptions and sources. The income
-            portion earns interest at the live rate of the Steakhouse USDG vault on
-            Morpho; on this test version that income is simulated. Rates change.
-          </p>
+          <p>Simulated NAV is the recorded refundable DemoUSD principal. The router retains those demo credits as reserves and issues fixed-price mock holdings to each account. Donations do not increase redemption rights. The illustrative certificate is not evidence of a funded position.</p>
         </section>
         <section>
           <h2>For developers</h2>
-          <p>
-            Each Basket is an <span className="mono">ERC-721</span> token with
-            its own <span className="mono">ERC-6551</span> token-bound account,
-            and that account holds every position onchain. Deposits and
-            redemptions go through a Diamond (<span className="mono">EIP-2535</span>)
-            contract; a partial redemption keeps the NFT and a full redemption
-            burns it. On testnet, each holding is a clearly labelled mock token
-            standing in for the issuer-bridged asset a mainnet gateway would
-            use, and the testnet pool is the counterparty.
-          </p>
-          <p>
-            Prices come from Chainlink on Robinhood Chain mainnet for stocks,
-            ETFs, ETH, BTC and LINK (normalized through USDG/USD), and from
-            CoinGecko for SOL, TAO, NEAR and RENDER. Just before a transaction,
-            Banda republishes any price older than half its 15-minute limit and
-            refreshes the Basket’s NAV guard; the contracts reject stale prices
-            and NAV. Redemptions pass <span className="mono">minAssetsOut</span>{" "}
-            at 99.5% of the previewed payout. The 0.25% management fee is fixed
-            onchain, accrues per second on the deposited amount and is
-            collected on redemption. Pausing stops deposits and rebalances,
-            never redemptions. Testnet admin authority is not yet behind a
-            multisig or timelock.
-          </p>
+          <p>The existing EIP-2535 Diamond storage and deposit/redemption facets are reused. A registry adapter connects the legacy deposit ABI to the standard ERC-6551 singleton. Token binding is immutable in proxy bytecode; no account initializer can be hijacked.</p>
+          <p>All live balances come from onchain reads. Transaction success requires a successful receipt. The application fails closed until Arc addresses are configured. Deployment and explorer verification remain pending until receipts and verification evidence are recorded.</p>
         </section>
       </div>
     </main>
