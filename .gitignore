@@ -15,3 +15,6 @@ playwright-report/
 !/PRODUCT.md
 /openhouse/
 /token2049/
+
+.vercel
+.env*
