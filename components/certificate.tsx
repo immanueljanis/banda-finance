@@ -80,7 +80,7 @@ export function Allocation({ basket }: { basket: Basket }) {
           <div key={allocation.label}>
             <span>
               <i className={`category-${i}`} />
-              {allocation.label}
+              {allocation.label === "DeFi yield" ? "Demo cash" : `Simulated ${allocation.label}`}
             </span>
             <b className="mono">{allocation.weight}%</b>
           </div>
@@ -121,19 +121,11 @@ export function Certificate({
       )}
       <div className="certificate-value">
         <Rosette className="certificate-rosette" />
-        <span className="eyebrow">Example $10,000 Basket</span>
+        <span className="eyebrow">Illustrative allocation, not a funded position</span>
         <strong>
-          <NavNumber value={basket.nav} />
+          <span className="mono">100 DemoUSD</span>
         </strong>
-        <div className="performance">
-          <span className={`${basket.change >= 0 ? "positive" : "negative"} mono`}>
-            {basket.change >= 0 ? "↗ +" : "↘ "}
-            {basket.change.toFixed(2)}%
-          </span>
-          <span className="muted">
-            <span className="mono">30</span> days, real prices
-          </span>
-        </div>
+        <div className="performance">Fixed demo prices. No yield.</div>
       </div>
       {!hero && <Sparkline basket={basket} />}
       <div className="certificate-allocation">
