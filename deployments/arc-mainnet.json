@@ -1,14 +1,374 @@
 {
   "chainId": 5042,
-  "status": "not-deployed",
-  "diamond": null,
-  "demoUSD": null,
-  "routers": [],
+  "status": "deployed",
+  "diamond": "0xefa0c1b2bc31345d7d795e0786968a607b5c6230",
+  "demoUSD": "0xd387ad52d5e5ab43d32975853a6a53ee2cd00328",
+  "routers": [
+    "0x0738d88418c625e82364c75a1160f4faa5fdb90e",
+    "0x2b0918b51587178d2a57c58d2d972069ee5a4360",
+    "0x578f94d870940064bd6bfb1a6f782b25e79a565d",
+    "0x447463e069d80cec7b55fac5f8e8a4783f806a72",
+    "0xb283ea18875eed8391d973f7ad80b97075876bbd"
+  ],
   "registry": "0x000000006551c19487814612e58FE06813775758",
-  "registryAdapter": null,
-  "accountImplementation": null,
-  "navAdapter": null,
-  "deploymentBlock": null,
-  "transactions": [],
-  "verification": "pending"
+  "registryAdapter": "0x287443027c8b97e29408e6395993333bf9b369f5",
+  "accountImplementation": "0x6a06be1e2af61811fc1323f027946a09edf9bed1",
+  "navAdapter": "0x9bf5d894de00274a0997e7d867611adf7cd851ca",
+  "deploymentBlock": "25785669",
+  "transactions": [
+    {
+      "hash": "0x3d8004bdaffd27a4f73c6d25a2660e7ae9a2f3e684c473d44f9c0cf11afdf929",
+      "blockNumber": "25785669",
+      "contract": null,
+      "address": null,
+      "explorer": "https://explorer.arc.io/tx/0x3d8004bdaffd27a4f73c6d25a2660e7ae9a2f3e684c473d44f9c0cf11afdf929"
+    },
+    {
+      "hash": "0x45021be2ee8cd316f88faeff742f00259f5a138de68d5cf0ba2ff99591622350",
+      "blockNumber": "25785673",
+      "contract": "DemoUSD",
+      "address": "0xd387ad52d5e5ab43d32975853a6a53ee2cd00328",
+      "explorer": "https://explorer.arc.io/tx/0x45021be2ee8cd316f88faeff742f00259f5a138de68d5cf0ba2ff99591622350"
+    },
+    {
+      "hash": "0x590b6cc9ee4ac8bbfbd21be71fb6c7502699cdac02ac7bfd081537406ebec54a",
+      "blockNumber": "25785677",
+      "contract": "RegistryAdapter",
+      "address": "0x287443027c8b97e29408e6395993333bf9b369f5",
+      "explorer": "https://explorer.arc.io/tx/0x590b6cc9ee4ac8bbfbd21be71fb6c7502699cdac02ac7bfd081537406ebec54a"
+    },
+    {
+      "hash": "0x13960135ff6d2f9518115660d6ad6c6026532cea91ef2a562aace7fed8a69fdc",
+      "blockNumber": "25785681",
+      "contract": "ArcBasketAccount",
+      "address": "0x6a06be1e2af61811fc1323f027946a09edf9bed1",
+      "explorer": "https://explorer.arc.io/tx/0x13960135ff6d2f9518115660d6ad6c6026532cea91ef2a562aace7fed8a69fdc"
+    },
+    {
+      "hash": "0x26ac73c400e0c47af16dbab6488c2bc376cb4ede96996a33ff3026a50d2a1519",
+      "blockNumber": "25785685",
+      "contract": "BandaInit",
+      "address": "0x8642f95ed9785afcd0c9f822fc91897e661e4a1f",
+      "explorer": "https://explorer.arc.io/tx/0x26ac73c400e0c47af16dbab6488c2bc376cb4ede96996a33ff3026a50d2a1519"
+    },
+    {
+      "hash": "0x6207c0d0ccc5251f9b089788f547773cd54f20f23cad3fab3f6ba31d96b90c5f",
+      "blockNumber": "25785688",
+      "contract": "DiamondCutFacet",
+      "address": "0x34196d3debc549aa6239cbad37039840071aedb3",
+      "explorer": "https://explorer.arc.io/tx/0x6207c0d0ccc5251f9b089788f547773cd54f20f23cad3fab3f6ba31d96b90c5f"
+    },
+    {
+      "hash": "0xfaa380229f6a4fc7349bd160c671506979b20d6a971cc40fbf93b8c8e2504ea1",
+      "blockNumber": "25785692",
+      "contract": "DiamondLoupeFacet",
+      "address": "0xf3a720cd23bba2da8bd9f979daef57df4764ad01",
+      "explorer": "https://explorer.arc.io/tx/0xfaa380229f6a4fc7349bd160c671506979b20d6a971cc40fbf93b8c8e2504ea1"
+    },
+    {
+      "hash": "0xce8b5a6c53fb77fccefe744509d3e6859f5bd4c213b86375e4da56c47806d6f0",
+      "blockNumber": "25785696",
+      "contract": "OwnershipFacet",
+      "address": "0xd5215b5a2d43d29441dc3df84733a91ad6536a3f",
+      "explorer": "https://explorer.arc.io/tx/0xce8b5a6c53fb77fccefe744509d3e6859f5bd4c213b86375e4da56c47806d6f0"
+    },
+    {
+      "hash": "0x09d9f04d9d5408178f76fe8c2b3a35b085469b1f84ce9b8153a7627b48a22da4",
+      "blockNumber": "25785700",
+      "contract": "AdminFacet",
+      "address": "0xf9568872c061c9461de6870fc0955230243ba84e",
+      "explorer": "https://explorer.arc.io/tx/0x09d9f04d9d5408178f76fe8c2b3a35b085469b1f84ce9b8153a7627b48a22da4"
+    },
+    {
+      "hash": "0x0ee15e1cdfdb046600d9d5673308c959dbd5f99b817fc5656f22ce18f0eead1d",
+      "blockNumber": "25785704",
+      "contract": "BasketNFTFacet",
+      "address": "0xfc2896142e6e0155cb2446d0f78a880d657cc81a",
+      "explorer": "https://explorer.arc.io/tx/0x0ee15e1cdfdb046600d9d5673308c959dbd5f99b817fc5656f22ce18f0eead1d"
+    },
+    {
+      "hash": "0x5d9fb7e49a32de596f765ddd2cbdf97ded8aeff9d971bc478a24dc42fe1576ef",
+      "blockNumber": "25785707",
+      "contract": "DepositFacet",
+      "address": "0xe960fd941c37d36a5c6ee8fe123c928625d1e02c",
+      "explorer": "https://explorer.arc.io/tx/0x5d9fb7e49a32de596f765ddd2cbdf97ded8aeff9d971bc478a24dc42fe1576ef"
+    },
+    {
+      "hash": "0x2c9cf815275badb3ecbef8c1f12c0fe7bfdec64e8559707d795773115773482b",
+      "blockNumber": "25785711",
+      "contract": "BasketViewFacet",
+      "address": "0xdfcaf4666c96b4b887b0fa7b30f05e9e5f1c3af0",
+      "explorer": "https://explorer.arc.io/tx/0x2c9cf815275badb3ecbef8c1f12c0fe7bfdec64e8559707d795773115773482b"
+    },
+    {
+      "hash": "0xab29019034bbbfee43e9feacb9d08e9d58e265413747aac2f49735d91d4d2efe",
+      "blockNumber": "25785715",
+      "contract": "RedeemFacet",
+      "address": "0x96d8593dbd35b49e78d4729d8fbe082f359c76a1",
+      "explorer": "https://explorer.arc.io/tx/0xab29019034bbbfee43e9feacb9d08e9d58e265413747aac2f49735d91d4d2efe"
+    },
+    {
+      "hash": "0xf9edead88156294bb0763feefc5d0ce3bf8226b490c2fb03e46a18470427356e",
+      "blockNumber": "25785719",
+      "contract": "NavGuardFacet",
+      "address": "0xbc9f1d60d48258dddb375edd3e25268b43a06b23",
+      "explorer": "https://explorer.arc.io/tx/0xf9edead88156294bb0763feefc5d0ce3bf8226b490c2fb03e46a18470427356e"
+    },
+    {
+      "hash": "0x681ab07f25f7045192224bb8ae024f5281e5608dfd9ab3d769358b49e83ad5f9",
+      "blockNumber": "25785722",
+      "contract": "Diamond",
+      "address": "0xefa0c1b2bc31345d7d795e0786968a607b5c6230",
+      "explorer": "https://explorer.arc.io/tx/0x681ab07f25f7045192224bb8ae024f5281e5608dfd9ab3d769358b49e83ad5f9"
+    },
+    {
+      "hash": "0x57427b660232459c14c2147712349848337eb04cf52eaec92fae7f7a4747defa",
+      "blockNumber": "25785726",
+      "contract": "MockPortfolioRouter",
+      "address": "0x0738d88418c625e82364c75a1160f4faa5fdb90e",
+      "explorer": "https://explorer.arc.io/tx/0x57427b660232459c14c2147712349848337eb04cf52eaec92fae7f7a4747defa"
+    },
+    {
+      "hash": "0xf4e03bb3d481f2e9f6942a32ed7946eb644c0eb2d9f9dee13b70024ed812296a",
+      "blockNumber": "25785730",
+      "contract": "MockPortfolioRouter",
+      "address": "0x2b0918b51587178d2a57c58d2d972069ee5a4360",
+      "explorer": "https://explorer.arc.io/tx/0xf4e03bb3d481f2e9f6942a32ed7946eb644c0eb2d9f9dee13b70024ed812296a"
+    },
+    {
+      "hash": "0x85f486d01799acb8da8c379a35aa0cf33735312c8dc16cfd9809dd3310a59e5a",
+      "blockNumber": "25785734",
+      "contract": "MockPortfolioRouter",
+      "address": "0x578f94d870940064bd6bfb1a6f782b25e79a565d",
+      "explorer": "https://explorer.arc.io/tx/0x85f486d01799acb8da8c379a35aa0cf33735312c8dc16cfd9809dd3310a59e5a"
+    },
+    {
+      "hash": "0x324cd25bd9e127c787e15e23a051eff471e27c6e2d9e4cfafed9c06fd9694cdc",
+      "blockNumber": "25785738",
+      "contract": "MockPortfolioRouter",
+      "address": "0x447463e069d80cec7b55fac5f8e8a4783f806a72",
+      "explorer": "https://explorer.arc.io/tx/0x324cd25bd9e127c787e15e23a051eff471e27c6e2d9e4cfafed9c06fd9694cdc"
+    },
+    {
+      "hash": "0xc1539a88789c43cd856e0028791eed528f649d127ca46f90632d9b8e0ebdb5d9",
+      "blockNumber": "25785741",
+      "contract": "MockPortfolioRouter",
+      "address": "0xb283ea18875eed8391d973f7ad80b97075876bbd",
+      "explorer": "https://explorer.arc.io/tx/0xc1539a88789c43cd856e0028791eed528f649d127ca46f90632d9b8e0ebdb5d9"
+    },
+    {
+      "hash": "0xdb40fe029fdbbdd05ee7a6b9f6eaf830a040552b3826d0600566750914e99452",
+      "blockNumber": "25785746",
+      "contract": "DemoNavAdapter",
+      "address": "0x9bf5d894de00274a0997e7d867611adf7cd851ca",
+      "explorer": "https://explorer.arc.io/tx/0xdb40fe029fdbbdd05ee7a6b9f6eaf830a040552b3826d0600566750914e99452"
+    },
+    {
+      "hash": "0xbf738ab3583f54143782f5a465d3beaf8e3f9ef9d630dd0b3f0ccef5d3fa6c53",
+      "blockNumber": "25785749",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": "https://explorer.arc.io/tx/0xbf738ab3583f54143782f5a465d3beaf8e3f9ef9d630dd0b3f0ccef5d3fa6c53"
+    },
+    {
+      "hash": "0x296f969ceee477154887d160da1bf02bb0f0c16026adc49fca79d24a06412968",
+      "blockNumber": "25785753",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": "https://explorer.arc.io/tx/0x296f969ceee477154887d160da1bf02bb0f0c16026adc49fca79d24a06412968"
+    },
+    {
+      "hash": "0xeacb74eb01b1d52d6d4d85a442f66375cd16f3aa94d4b2d3fc11ce7c17e06943",
+      "blockNumber": "25785756",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": "https://explorer.arc.io/tx/0xeacb74eb01b1d52d6d4d85a442f66375cd16f3aa94d4b2d3fc11ce7c17e06943"
+    },
+    {
+      "hash": "0x9878cb59b60d10dd37f650615d37a0bc1e40d4df67493c1e9d6bdbcdce362607",
+      "blockNumber": "25785760",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": "https://explorer.arc.io/tx/0x9878cb59b60d10dd37f650615d37a0bc1e40d4df67493c1e9d6bdbcdce362607"
+    },
+    {
+      "hash": "0x2b1d991dcbf032000af12b43dea6ef464d958b767d3cde3db3f74ea9979c26f8",
+      "blockNumber": "25785764",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": "https://explorer.arc.io/tx/0x2b1d991dcbf032000af12b43dea6ef464d958b767d3cde3db3f74ea9979c26f8"
+    },
+    {
+      "hash": "0xc0f0e5d03c7ac89c8031a389d7444cbab73a4dc4330654648dceafa94eeb20fd",
+      "blockNumber": "25785768",
+      "contract": "Diamond",
+      "address": null,
+      "explorer": "https://explorer.arc.io/tx/0xc0f0e5d03c7ac89c8031a389d7444cbab73a4dc4330654648dceafa94eeb20fd"
+    }
+  ],
+  "verification": {
+    "status": "verified",
+    "verifier": "sourcify",
+    "match": "exact_match",
+    "contracts": 52,
+    "checkedAt": "2026-10-13T17:24:05.634Z",
+    "note": "Explorer (Blockscout) API is behind a Cloudflare challenge; direct explorer submission returned 403."
+  },
+  "owner": "0xc924D1236422Ccca9d08e78f059b574f443Ca29d",
+  "baskets": [
+    {
+      "strategyId": 1,
+      "router": "0x0738d88418c625e82364c75a1160f4faa5fdb90e",
+      "assets": [
+        {
+          "address": "0xac302e5CD486C0d8d0398f9669243f405811F94b",
+          "weightBps": 3000
+        },
+        {
+          "address": "0xA937E21E347C976Faa0Bb2ddd4211c47368d9DD3",
+          "weightBps": 2000
+        },
+        {
+          "address": "0x6EcF6c7a721CCB903259B40F8CB3b8BB67cD808b",
+          "weightBps": 1500
+        },
+        {
+          "address": "0x3733928D8Fd1d55f5Df8b3a229BBA2BC53Ee63d7",
+          "weightBps": 1000
+        },
+        {
+          "address": "0x76C1057D0408674c400090191d0D4dDc2d5A6216",
+          "weightBps": 1000
+        },
+        {
+          "address": "0xcff6045ce2089699467f374f9bC52B200934CFA8",
+          "weightBps": 1500
+        }
+      ]
+    },
+    {
+      "strategyId": 2,
+      "router": "0x2b0918b51587178d2a57c58d2d972069ee5a4360",
+      "assets": [
+        {
+          "address": "0x2318483F2867BCeC2e548d7f198572964f4027e4",
+          "weightBps": 2000
+        },
+        {
+          "address": "0x48756848F8Ef3741d425f6ad413bD6D346BE64aB",
+          "weightBps": 1500
+        },
+        {
+          "address": "0x88be1faaa68E3d6d1684d4a6cb4b3FD14AC8f734",
+          "weightBps": 2000
+        },
+        {
+          "address": "0x327275d4ede2194D8896b31D750c5e2cf11B2576",
+          "weightBps": 1500
+        },
+        {
+          "address": "0x439A961a1d63B2dd1AE6FDF7b7C782A178CdA5f6",
+          "weightBps": 1000
+        },
+        {
+          "address": "0x8862DB511cd866a84C63407A68bc810e65e5fB93",
+          "weightBps": 500
+        },
+        {
+          "address": "0xEa0E9C058fc7ddeEd3dfa6e1D573412E0bdC7461",
+          "weightBps": 1500
+        }
+      ]
+    },
+    {
+      "strategyId": 3,
+      "router": "0x578f94d870940064bd6bfb1a6f782b25e79a565d",
+      "assets": [
+        {
+          "address": "0x1127ad3c2393D8c7391A7782a40BE784804D52a2",
+          "weightBps": 3000
+        },
+        {
+          "address": "0xcc3c45bDF21292699583a42d12dc5b1e594EabBD",
+          "weightBps": 2500
+        },
+        {
+          "address": "0xf1C797d9a32560C84455AbFedD4078FEc69E4809",
+          "weightBps": 2000
+        },
+        {
+          "address": "0x9D5dA819081b2EBadf9AA8394A711C24C35Cc946",
+          "weightBps": 1000
+        },
+        {
+          "address": "0x776Aba3C22aE1de581F759Dd85506b062ca7DA2b",
+          "weightBps": 1500
+        }
+      ]
+    },
+    {
+      "strategyId": 4,
+      "router": "0x447463e069d80cec7b55fac5f8e8a4783f806a72",
+      "assets": [
+        {
+          "address": "0x89E06F5AB6A4B704bA74922f75790726698CFc12",
+          "weightBps": 2500
+        },
+        {
+          "address": "0xf86D5953670434Df553b72aB5e97a5Da581D8627",
+          "weightBps": 1500
+        },
+        {
+          "address": "0xcd8596547C9EB43Bd35a94A69B315e1e28949b26",
+          "weightBps": 1500
+        },
+        {
+          "address": "0xd1503aB9e3284D10F217214939f7f25b65646751",
+          "weightBps": 1500
+        },
+        {
+          "address": "0x1b01F1C6f253946AEA24916ED1E463137bE3907D",
+          "weightBps": 1000
+        },
+        {
+          "address": "0x9674007D3Bcf804af1B1567c9B479cA18fA18117",
+          "weightBps": 500
+        },
+        {
+          "address": "0x940B77A26Cf874DAAB4c961e8BBD64424E0f5841",
+          "weightBps": 500
+        },
+        {
+          "address": "0xf243145A644524Ad058e60E80445ab67f05f19F0",
+          "weightBps": 1000
+        }
+      ]
+    },
+    {
+      "strategyId": 5,
+      "router": "0xb283ea18875eed8391d973f7ad80b97075876bbd",
+      "assets": [
+        {
+          "address": "0x60AEE3c937d784BE9cAa994c0B13DdcFdd6e6Edd",
+          "weightBps": 3000
+        },
+        {
+          "address": "0x3157a42114ed2c875702f1d0C463540dF4417148",
+          "weightBps": 2000
+        },
+        {
+          "address": "0xf2b1fF3568F3858E834EE1b0045dE7FF32410882",
+          "weightBps": 1500
+        },
+        {
+          "address": "0x441E3D9a0fd7c24B33E5c587311A853fef15981C",
+          "weightBps": 1000
+        },
+        {
+          "address": "0xbD84Cf91e3cD72DDA43B03e6aeb2eE5072278AFe",
+          "weightBps": 2500
+        }
+      ]
+    }
+  ]
 }
