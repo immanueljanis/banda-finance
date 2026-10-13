@@ -3,7 +3,7 @@
   "status": "not-deployed",
   "diamond": null,
   "demoUSD": null,
-  "router": null,
+  "routers": [],
   "registry": "0x000000006551c19487814612e58FE06813775758",
   "registryAdapter": null,
   "accountImplementation": null,

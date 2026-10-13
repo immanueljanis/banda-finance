@@ -19,17 +19,22 @@ for(const tx of txs){
   transactions.push({hash:tx.hash,blockNumber:String(receipt.blockNumber),contract:tx.contractName||null,address:receipt.contractAddress||null,explorer:local?null:`https://${chainId===5042002?'explorer.testnet':'explorer'}.arc.io/tx/${tx.hash}`});
 }
 const deployed=name=>{const tx=txs.find(t=>t.contractName===name&&t.transactionType==='CREATE');if(!tx?.contractAddress)throw new Error(`Missing ${name}`);return tx.contractAddress;};
-const manifest={chainId,status:local?'local-rehearsal':'deployed',diamond:deployed('Diamond'),demoUSD:deployed('DemoUSD'),router:deployed('MockPortfolioRouter'),registry:'0x000000006551c19487814612e58FE06813775758',registryAdapter:deployed('RegistryAdapter'),accountImplementation:deployed('ArcBasketAccount'),navAdapter:deployed('DemoNavAdapter'),deploymentBlock:transactions[0].blockNumber,transactions,verification:'pending'};
-for(const key of ['diamond','demoUSD','router','registryAdapter','accountImplementation','navAdapter']){
-  const code=await client.getCode({address:manifest[key]});if(!code||code==='0x')throw new Error(`No bytecode: ${key}`);
+const manifest={chainId,status:local?'local-rehearsal':'deployed',diamond:deployed('Diamond'),demoUSD:deployed('DemoUSD'),routers:txs.filter(t=>t.contractName==='MockPortfolioRouter'&&t.transactionType==='CREATE').map(t=>t.contractAddress),registry:'0x000000006551c19487814612e58FE06813775758',registryAdapter:deployed('RegistryAdapter'),accountImplementation:deployed('ArcBasketAccount'),navAdapter:deployed('DemoNavAdapter'),deploymentBlock:transactions[0].blockNumber,transactions,verification:'pending'};
+if(manifest.routers.length!==5)throw new Error('Expected five basket routers');
+for(const address of ['diamond','demoUSD','registryAdapter','accountImplementation','navAdapter'].map(key=>manifest[key]).concat(manifest.routers)){
+  const code=await client.getCode({address});if(!code||code==='0x')throw new Error(`No bytecode: ${address}`);
 }
-const abi=parseAbi(['function owner() view returns(address)','function legs() view returns(address[],uint16[])','function registry() view returns(address)','function settlementAsset() view returns(address)']);
+const abi=parseAbi(['function owner() view returns(address)','function legs() view returns(address[],uint16[])','function registry() view returns(address)','function settlementAsset() view returns(address)','function strategy(uint32) view returns(address,uint96,uint16,address,bool)']);
 manifest.registry=await client.readContract({address:manifest.registryAdapter,abi,functionName:'registry'});
 manifest.owner=await client.readContract({address:manifest.diamond,abi,functionName:'owner'});
 const settlement=await client.readContract({address:manifest.diamond,abi,functionName:'settlementAsset'});
 if(settlement.toLowerCase()!==manifest.demoUSD.toLowerCase())throw new Error('Settlement mismatch');
-const [tokens,weights]=await client.readContract({address:manifest.router,abi,functionName:'legs'});
-manifest.assets=tokens.map((address,i)=>({address,weightBps:weights[i]}));
+manifest.baskets=await Promise.all(manifest.routers.map(async(router,i)=>{
+  const [strategyRouter]=await client.readContract({address:manifest.diamond,abi,functionName:'strategy',args:[i+1]});
+  if(strategyRouter.toLowerCase()!==router.toLowerCase())throw new Error(`Strategy ${i+1} router mismatch`);
+  const [tokens,weights]=await client.readContract({address:router,abi,functionName:'legs'});
+  return {strategyId:i+1,router,assets:tokens.map((address,j)=>({address,weightBps:weights[j]}))};
+}));
 const target=local?'local-arc':chainId===5042?'arc-mainnet':'arc-testnet';
 await writeFile(new URL(`../deployments/${target}.json`,import.meta.url),JSON.stringify(manifest,null,2)+'\n');
 console.log(`Verified ${transactions.length} successful receipts; recorded deployments/${target}.json. Explorer source verification remains pending.`);
