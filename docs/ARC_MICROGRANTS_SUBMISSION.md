@@ -4,24 +4,24 @@
 
 **Problem:** Multi-asset positions are fragmented across tokens and applications. Ownership, custody and portfolio accounting are difficult to inspect as one unit.
 
-**Solution:** Banda connects an ERC-721 Basket to its own ERC-6551 account. The Arc proof of concept demonstrates actual ownership, custody, deterministic allocation and redemption with explicitly simulated economic assets.
+**Solution:** Banda connects an ERC-721 Basket to its own ERC-6551 account. One deposit buys a themed portfolio; the NFT owns the account that holds every asset, and transferring the NFT transfers the whole portfolio.
 
-**Technical architecture:** Existing EIP-2535 Diamond facets manage NFT ownership and deposit/redemption. A restricted mock router issues six synthetic NEURAL legs to each account. DemoUSD reserves cover fixed principal refunds. The existing Next.js interface displays actual RPC balances and transaction receipts.
+**Technical architecture:** EIP-2535 Diamond facets manage NFT ownership, deposits and redemption. Each of the five Baskets has its own router that keeps the deposit in reserve and issues the Basket's asset tokens into the NFT's ERC-6551 account. A Next.js interface shows live RPC balances and confirmed transaction receipts.
 
-**Why Arc:** Arc provides EVM execution and USDC-denominated gas. The demo keeps native gas accounting separate from valueless DemoUSD settlement while demonstrating composable portfolio custody.
+**Why Arc:** Arc provides EVM execution with USDC-denominated gas, so a USDC-settled portfolio product pays fees in the same unit it is priced in.
 
-**Implemented:** Arc configuration, deployable contracts, limited faucet, one six-leg Basket, deterministic custody, full redemption, wallet integration and automated contract tests. Mainnet simulation and local deployment rehearsal have run. Live mainnet functionality is not yet claimed.
+**Implemented:** Five live Baskets on Arc Mainnet (NEURAL, RAILS, RESERVE, FRONTIER, FORTRESS), test USDC faucet, deterministic ERC-6551 custody, full redemption, wallet integration, contract tests and a local end-to-end browser journey.
 
-**Live demo:** Pending verified Arc deployment and hosting. Existing project website: https://www.bandafinance.xyz/ (not yet verified as the Arc demo).
+**Live demo:** Pending hosting.
 
-**Repository:** https://github.com/immanueljanis/banda-finance — created private at the owner's request. Upload of Arc changes is pending. Public-repository eligibility is not yet met; changing visibility requires the owner's authorization. Original project: https://github.com/immanueljanis/banda.
+**Repository:** https://github.com/immanueljanis/banda-finance — Arc changes uploaded. The repository is currently private; it must be made public to meet eligibility. Original project: https://github.com/immanueljanis/banda.
 
-**Verified contract addresses:** Pending; no mainnet deployment claims.
+**Verified contract addresses:** Diamond [`0xeFA0c1B2bc31345d7d795E0786968a607B5C6230`](https://explorer.arc.io/address/0xeFA0c1B2bc31345d7d795E0786968a607B5C6230). All 52 contracts are source-verified (Sourcify exact match, shown as verified on the Arc explorer); the full list is in the README.
 
-**Transaction evidence:** Mainnet evidence pending. Local rehearsal artifacts are development evidence only.
+**Transaction evidence:** Deployment: 27 confirmed transactions from block 25785669 (`deployments/arc-mainnet.json`). Mainnet user journey (faucet, deposit, redeem): pending.
 
-**Limitations:** All assets and valuations are simulated, unbacked and without monetary value. No real investments, liquidity, yields or real-USDC redemption. Unaudited; the Diamond owner retains upgrade/configuration powers. Acceptance of simulated assets by the program is not guaranteed.
+**Limitations:** Settlement uses test USDC and test asset tokens with fixed prices; there are no real investments, liquidity, yield or redemption into real USDC yet. Unaudited; the Diamond owner retains upgrade and configuration powers.
 
-**Future opportunities:** Additional curated Baskets, event indexing, richer account interoperability, external security review and carefully scoped integrations with real assets after appropriate technical and legal work.
+**Future opportunities:** Real USDC settlement and real asset routing on Arc, event indexing, richer account interoperability and an external security review.
 
-Before submission, replace pending fields with verified links, attach a successful mainnet full-redemption journey and confirm current program terms/deadline on the official hackathon page.
+Before submission: add the hosted demo link, record the mainnet journey hashes, make the repository public and confirm current program terms and deadline on the official hackathon page.
