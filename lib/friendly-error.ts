@@ -20,8 +20,10 @@ const REVERTS: [RegExp, string][] = [
   [/invalid shares|empty redeem/, "Choose how much to withdraw."],
   [/fee exceeds proceeds|fee insolvent/, "That withdrawal is too small to cover its fee."],
   [/inventory exhausted/, "One of this Basket’s test assets is out of stock right now. Try a smaller amount or another Basket."],
-  [/ERC20: balance|transfer amount exceeds balance|insufficient balance/i, "Not enough USDG in this wallet. Get free testnet USDG from the Paxos faucet on the Get USDG page."],
-  [/ERC20: allowance/, "Banda was not allowed to use your USDG. Please try again and approve it in your wallet."],
+  [/Faucet: daily limit/, "You already claimed test USDC today. Try again in 24 hours."],
+  [/Faucet: lifetime limit/, "This wallet has claimed its 5,000 test USDC limit."],
+  [/ERC20: balance|transfer amount exceeds balance|insufficient balance|underflow/i, "Not enough USDC in this wallet. Claim free test USDC on the Get USDC page."],
+  [/ERC20: allowance|Demo: allowance/, "Banda was not allowed to use your USDC. Please try again and approve it in your wallet."],
   [/recipient rejected|payout failed|transfer failed/, "The transfer was rejected. Nothing was changed."],
 ];
 
@@ -34,7 +36,7 @@ export function friendlyError(reason: unknown, fallback = "Something went wrong.
   if (reason instanceof BaseError) {
     if (reason.walk((error) => error instanceof UserRejectedRequestError)) return CANCELLED;
     if (reason.walk((error) => error instanceof InsufficientFundsError)) return "This wallet needs a little test ETH to pay the network fee.";
-    if (reason.walk((error) => error instanceof ChainMismatchError)) return "Switch your wallet to the Robinhood Chain test network and try again.";
+    if (reason.walk((error) => error instanceof ChainMismatchError)) return "Switch your wallet to Arc Mainnet and try again.";
     if (reason.walk((error) => error instanceof TimeoutError || error instanceof HttpRequestError)) return "The network is slow to respond. Check your portfolio before retrying.";
     const revert = reason.walk((error) => error instanceof ContractFunctionRevertedError);
     const text = revert instanceof ContractFunctionRevertedError ? `${revert.reason ?? ""} ${revert.shortMessage}` : `${reason.shortMessage} ${reason.details ?? ""}`;
