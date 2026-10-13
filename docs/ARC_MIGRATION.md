@@ -28,4 +28,4 @@ Deployed to Arc Mainnet on 2026-10-13 from block 25785669: 27 confirmed transact
 
 All 52 contracts (deployment contracts, router-issued asset tokens and the registry) are verified on Sourcify with exact creation and runtime matches, and the Arc explorer shows them as verified. The explorer API sits behind a Cloudflare challenge, so verify through `--verifier sourcify`. Addresses are in the README and `deployments/arc-mainnet.json`.
 
-Local Anvil transactions are genuine local execution, but are not Arc Mainnet evidence. Public application hosting and a recorded mainnet user journey remain pending.
+Local Anvil transactions are genuine local execution, but are not Arc Mainnet evidence. The app is hosted at https://banda-arc.vercel.app (Vercel Hobby). A recorded mainnet user journey remains pending.

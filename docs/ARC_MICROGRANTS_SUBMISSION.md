@@ -12,7 +12,7 @@
 
 **Implemented:** Five live Baskets on Arc Mainnet (NEURAL, RAILS, RESERVE, FRONTIER, FORTRESS), test USDC faucet, deterministic ERC-6551 custody, full redemption, wallet integration, contract tests and a local end-to-end browser journey.
 
-**Live demo:** Pending hosting.
+**Live demo:** https://banda-arc.vercel.app
 
 **Repository:** https://github.com/immanueljanis/banda-finance — Arc changes uploaded. The repository is currently private; it must be made public to meet eligibility. Original project: https://github.com/immanueljanis/banda.
 
@@ -24,4 +24,4 @@
 
 **Future opportunities:** Real USDC settlement and real asset routing on Arc, event indexing, richer account interoperability and an external security review.
 
-Before submission: add the hosted demo link, record the mainnet journey hashes, make the repository public and confirm current program terms and deadline on the official hackathon page.
+Before submission: record the mainnet journey hashes, make the repository public and confirm current program terms and deadline on the official hackathon page.

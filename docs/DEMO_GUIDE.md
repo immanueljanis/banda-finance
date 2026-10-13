@@ -1,8 +1,8 @@
 # Judge walkthrough
 
-Contracts are live and source-verified on Arc Mainnet (Diamond [`0xeFA0c1B2bc31345d7d795E0786968a607B5C6230`](https://explorer.arc.io/address/0xeFA0c1B2bc31345d7d795E0786968a607B5C6230)). The hosted frontend is pending; until then run it locally with `bun dev`, which reads the mainnet manifest.
+Contracts are live and source-verified on Arc Mainnet (Diamond [`0xeFA0c1B2bc31345d7d795E0786968a607B5C6230`](https://explorer.arc.io/address/0xeFA0c1B2bc31345d7d795E0786968a607B5C6230)). Live app: https://banda-arc.vercel.app.
 
-1. Open the frontend. Connect MetaMask, Rabby or a supported wallet and approve switching to Arc Mainnet (5042). Native USDC is needed only for gas.
+1. Open https://banda-arc.vercel.app. Connect MetaMask, Rabby or a supported wallet and approve switching to Arc Mainnet (5042). Native USDC is needed only for gas.
 2. Open Portfolio and scroll to Faucet. Claim 1,000 test USDC (limits: one claim per 24 hours, 5,000 per wallet). Confirm the receipt via its explorer link.
 3. Pick any of the five Baskets. Enter at least 10 USDC with at most six decimal places; 100 is a convenient example. Review the allocation preview.
 4. Approve the exact amount and confirm the deposit. These are separate transactions when allowance is insufficient.

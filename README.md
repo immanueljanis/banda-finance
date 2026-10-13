@@ -2,7 +2,7 @@
 
 One NFT controls a portfolio account. Banda reuses its EIP-2535 Diamond, ERC-721 ownership and ERC-6551 custody architecture on Arc, with five onchain Baskets live on Arc Mainnet.
 
-Contracts are deployed and source-verified on Arc Mainnet; see [Arc Mainnet deployment](#arc-mainnet-deployment). Diamond: [`0xeFA0c1B2bc31345d7d795E0786968a607B5C6230`](https://explorer.arc.io/address/0xeFA0c1B2bc31345d7d795E0786968a607B5C6230). A hosted build is not yet published.
+Contracts are deployed and source-verified on Arc Mainnet; see [Arc Mainnet deployment](#arc-mainnet-deployment). Diamond: [`0xeFA0c1B2bc31345d7d795E0786968a607B5C6230`](https://explorer.arc.io/address/0xeFA0c1B2bc31345d7d795E0786968a607B5C6230). Live app: https://banda-arc.vercel.app.
 
 ## Implemented scope
 
